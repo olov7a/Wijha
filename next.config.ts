@@ -27,6 +27,9 @@ const securityHeaders = [
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   { key: "Content-Security-Policy", value: csp },
+  ...(process.env.NEXT_PUBLIC_APP_ENV === "staging"
+    ? [{ key: "X-Robots-Tag", value: "noindex, nofollow" }]
+    : []),
 ];
 
 const nextConfig: NextConfig = {

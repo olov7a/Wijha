@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import { LocaleProvider } from "@/components/providers/locale-provider";
+import { isStaging } from "@/lib/env";
 import { getI18n } from "@/lib/i18n/server";
 import "./globals.css";
 
@@ -27,6 +28,7 @@ const themeScript = `(function(){try{var k="wijha-theme";var s=localStorage.getI
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const { locale, dir } = await getI18n();
+  const staging = isStaging();
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
@@ -35,6 +37,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body className={`${cairo.variable} bg-canvas font-body text-ink antialiased`}>
+        {staging && (
+          <div role="banner" aria-live="polite" className="bg-pending text-pending-ink px-4 py-2 text-center text-xs font-bold">
+            Test environment - use fake data only. No real payments.
+          </div>
+        )}
         <LocaleProvider locale={locale}>{children}</LocaleProvider>
       </body>
     </html>
