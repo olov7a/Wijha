@@ -133,7 +133,10 @@ export async function signUp(_previousState: AuthState, formData: FormData): Pro
     redirect("/dashboard");
   }
 
-  return { success: t.auth.errors.signupSuccess };
+  // Account created but email not confirmed yet: send the user to login so
+  // they can confirm from their inbox and then sign in.
+  revalidatePath("/", "layout");
+  redirect("/login?registered=1");
 }
 
 export async function signOut() {
