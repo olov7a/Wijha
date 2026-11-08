@@ -1,0 +1,730 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_dashboard" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-container":"#0f766e","outline-variant":"#bdc9c6","on-tertiary-fixed-variant":"#005142","primary":"#005c55","surface-container-low":"#eff4ff","surface-dim":"#d0dbed","tertiary-container":"#0b7763","border-subtle":"#D6E4E0","tertiary-fixed":"#9af3da","secondary-fixed-dim":"#ffb59e","primary-fixed":"#9cf2e8","on-surface-variant":"#3e4947","status-rejected":"#C0392B","surface-container-highest":"#d9e3f6","tertiary-fixed-dim":"#7ed7bf","surface-tint":"#006a63","tertiary":"#005c4c","secondary-container":"#fc9a7b","on-tertiary-container":"#a1fbe2","secondary":"#95482f","surface-container-high":"#dee9fc","on-primary":"#ffffff","on-tertiary":"#ffffff","on-tertiary-fixed":"#002019","on-secondary-fixed":"#3a0b00","on-primary-fixed-variant":"#00504a","surface":"#FFFFFF","on-surface":"#121c2a","text-muted":"#6B7280","on-primary-container":"#a3faef","surface-container":"#e6eeff","surface-variant":"#d9e3f6","on-background":"#121c2a","inverse-on-surface":"#eaf1ff","on-secondary-fixed-variant":"#77311a","surface-container-lowest":"#ffffff","on-primary-fixed":"#00201d","surface-bright":"#f8f9ff","primary-fixed-dim":"#80d5cb","on-error-container":"#93000a","error":"#ba1a1a","page-bg":"#F4FBF9","background":"#f8f9ff","on-error":"#ffffff","outline":"#6e7977","error-container":"#ffdad6","status-approved":"#2E9E6B","secondary-fixed":"#ffdbd0","on-secondary":"#ffffff","on-secondary-container":"#753019","inverse-surface":"#27313f","status-pending":"#E0A100","inverse-primary":"#80d5cb"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{margin:"2rem",gutter:"1.5rem","gutter-mobile":"1rem","space-sm":"0.75rem","space-xs":"0.5rem","space-md":"1rem","space-lg":"1.5rem","margin-mobile":"1rem","space-xl":"2rem"},fontFamily:{"label-sm":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],caption:["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"]},fontSize:{"label-sm":["12px",{lineHeight:"18px",fontWeight:"500"}],"body-lg":["16px",{lineHeight:"28px",fontWeight:"400"}],"headline-lg":["22px",{lineHeight:"38px",fontWeight:"700"}],"headline-sm":["18px",{lineHeight:"30px",fontWeight:"600"}],caption:["13px",{lineHeight:"22px",fontWeight:"400"}],"body-sm":["14px",{lineHeight:"24px",fontWeight:"400"}],"headline-xl":["32px",{lineHeight:"54px",fontWeight:"700"}],"headline-xl-mobile":["28px",{lineHeight:"48px",fontWeight:"700"}],"label-md":["14px",{lineHeight:"22px",fontWeight:"600"}],"headline-lg-mobile":["20px",{lineHeight:"34px",fontWeight:"700"}]}}}}</script></head><body class="bg-page-bg text-on-surface font-body-lg text-body-lg"><aside class="fixed right-0 top-0 h-full w-64 bg-surface z-50 flex flex-col shadow-[0_1px_8px_rgba(15,118,110,0.06)]"><div class="h-20 px-space-lg flex items-center gap-space-xs"><div class="flex items-center gap-space-xs"><img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlXrDJE-1z_ipJztVcTHDv_zLc3KqZFo0pVNw-rrCbBu4PpEEj90_FoJJ_Yi7WUfJGHfa_-kbtc4cP9k-RT8O4iRNMz5h_J-W1WrQr3IqAki15JpJ3B4o5rxwOfO44VqS_g-38xPaRdkShXOy5Ix1lwgZzypcj8k_a8o1eQGpvKHXjBLcOmRXgRMB_e8gW3kU2FqZc1myT6WUEQaPerByq9I8VSMXx85Ez98CS8QHbpPn1S2dEG32t" alt="WIJHA" class="h-10 w-auto object-contain"><span class="font-caption text-caption text-text-muted">لوحة الإدارة والفريق</span></div></div><nav class="flex-1 px-space-md py-space-sm space-y-space-xs" data-active-classes="bg-surface-container text-primary font-label-md"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="team-dashboard" href="#"><span class="material-symbols-outlined text-[20px]">verified</span>الموافقات والتوثيق</a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl transition-all bg-surface-container text-primary font-label-md" data-path="pending-listings" href="#"><span class="material-symbols-outlined text-[20px]">real_estate_agent</span>مراجعة الوحدات</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="identity-verifications" href="#"><span class="material-symbols-outlined text-[20px]">badge</span>إثباتات الطلاب</a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-all" data-path="team-reports" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span>التقارير والإحصائيات</a></nav><div class="p-space-md"><a class="flex items-center justify-center gap-space-xs w-full py-space-xs rounded-xl bg-surface-container-low text-primary font-label-md text-label-md hover:bg-surface-container transition-colors" data-path="home" href="#"><span class="material-symbols-outlined text-[18px]">arrow_forward</span>العودة للمنصة</a></div></aside><div class="pr-64"><header class="fixed top-0 right-64 left-0 h-20 bg-surface/90 backdrop-blur-xl z-40 px-space-lg flex items-center justify-between shadow-[0_1px_8px_rgba(15,118,110,0.06)]"><div class="flex items-center gap-space-md"><span class="font-label-md text-label-md text-text-muted">مركز إدارة التدقيق والموافقات الرسمية</span></div><div class="flex items-center gap-space-md"><a class="flex items-center gap-space-xs p-space-xs rounded-full hover:bg-surface-container-low transition-colors" data-path="profile" href="#"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-container/20" src="https://lh3.googleusercontent.com/aida/AEtjO1V693vXQ_FOE__hjCGibKhnsfCz9_w3iNAfzCIPuQImHefIV86S8zKObqejuEEVxw_9qqe_2QOkM4FgcSoBDve2ziI878Cxp4I51MWby52tFN4Nq-326XNR-zkQdrIYsJ53WF7IPHg402YjOAzqgOCYOHz9ytvI10Jr0RgralKRbu98TyDCUffunFaJdrm9q9sWgYq5HIrkzhTUJMW5xkfGn0wqXKJag2V2PFeUlznw_WXYgKSwzQfdHQ"></a></div></header><main class="w-full pt-20 px-space-lg bg-page-bg"><div class="flex flex-col w-full pb-16 space-y-8">
+<!-- Header Bar: Context & Quick Operations -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-fixed text-on-primary-fixed-variant">
+          إصدار التفتيش الميداني 2.4
+        </span>
+<span class="text-caption font-caption text-text-muted">آخر تحديث مباشر: منذ 3 دقائق</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-on-surface tracking-tight">قائمة تدقيق واعتمادات الميدان</h1>
+<p class="text-body-sm font-body-sm text-text-muted max-w-2xl">
+        إدارة ومراجعة تقارير المفتشين الميدانيين لضمان جودة السكن الجامعي، واعتماد تراخيص وتوثيق هويات الطلاب قبل النشر النهائي.
+      </p>
+</div>
+<!-- Quick Action Toolset -->
+<div class="flex items-center gap-3 self-start md:self-auto">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-primary-container text-on-primary rounded-xl font-label-md text-label-md shadow-md hover:opacity-95 transition-all" onclick="document.getElementById('evaluationModal').classList.remove('hidden')">
+<span class="material-symbols-outlined text-[18px]">add_task</span>
+<span class="">نموذج تقييم فوري</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2.5 bg-surface rounded-xl font-label-md text-label-md text-on-surface shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px] text-primary">download</span>
+<span class="">تصدير السجل</span>
+</button>
+</div>
+</div>
+<!-- KPI Overview Metrics -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Metric 1: Pending Inspections -->
+<div class="relative overflow-hidden bg-surface p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">وحدات تنتظر الفحص</span>
+<span class="p-2.5 rounded-xl bg-status-pending/10 text-status-pending">
+<span class="material-symbols-outlined text-[22px]">pending_actions</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface font-bold">14</span>
+<span class="text-label-sm font-label-sm text-status-pending font-semibold">+3 جديدة اليوم</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 mt-3 overflow-hidden">
+<div class="bg-status-pending h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<!-- Metric 2: Today Visits -->
+<div class="relative overflow-hidden bg-surface p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">زيارات مجدولة اليوم</span>
+<span class="p-2.5 rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface font-bold">8</span>
+<span class="text-label-sm font-label-sm text-primary font-semibold">5 فِرق بالميدان</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 mt-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<!-- Metric 3: Student IDs Pending -->
+<div class="relative overflow-hidden bg-surface p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">كارنيهات وهوية قيد التحقق</span>
+<span class="p-2.5 rounded-xl bg-secondary/10 text-secondary">
+<span class="material-symbols-outlined text-[22px]">badge</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-on-surface font-bold">29</span>
+<span class="text-label-sm font-label-sm text-text-muted">متوسط الانتظار 25د</span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 mt-3 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<!-- Metric 4: Acceptance Rate -->
+<div class="relative overflow-hidden bg-surface p-5 rounded-2xl shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-text-muted">معدل الاعتماد الإجمالي</span>
+<span class="p-2.5 rounded-xl bg-status-approved/10 text-status-approved">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+</span>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-headline-xl font-headline-xl text-status-approved font-bold">92.4%</span>
+<span class="text-label-sm font-label-sm text-status-approved flex items-center">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+          +1.8%
+        </span>
+</div>
+<div class="w-full bg-surface-container-low rounded-full h-1.5 mt-3 overflow-hidden">
+<div class="bg-status-approved h-full rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</div>
+<!-- Primary Review Section: Real Estate Units Detailed Table & Controls -->
+<div class="bg-surface rounded-2xl shadow-sm overflow-hidden flex flex-col">
+<!-- Table Header & Filter Bar -->
+<div class="p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container-low/40">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-xl text-primary">
+<span class="material-symbols-outlined text-[22px]">apartment</span>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">مراجعة تقارير الوحدات السكنية</h2>
+<p class="text-caption font-caption text-text-muted">تحقق من تقارير الفحص الميداني واتخاذ القرار المناسب</p>
+</div>
+</div>
+<!-- Filters & Search -->
+<div class="flex flex-wrap items-center gap-2.5">
+<div class="relative">
+<input class="pl-9 pr-4 py-2 bg-surface text-body-sm font-body-sm rounded-xl outline-none focus:ring-2 focus:ring-primary/20 w-64 shadow-sm placeholder:text-text-muted" placeholder="بحث بالوحدة، المالك، أو المنطقة..." type="text">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-[18px] text-text-muted">search</span>
+</div>
+<select class="px-3 py-2 bg-surface rounded-xl text-label-md font-label-md text-on-surface outline-none shadow-sm cursor-pointer">
+<option>كل المناطق (القاهرة والجيزة)</option>
+<option>الدقي</option>
+<option>مدينة نصر</option>
+<option>بين السرايات / الجيزة</option>
+<option>التجمع الخامس</option>
+</select>
+<button class="px-3 py-2 bg-surface rounded-xl text-label-md font-label-md text-on-surface-variant flex items-center gap-1.5 shadow-sm hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span class="">تصفية متقدمة</span>
+</button>
+</div>
+</div>
+<!-- Units Data Table -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-right divide-y-0">
+<thead>
+<tr class="bg-surface-container-low/80 text-text-muted text-label-sm font-label-sm">
+<th class="py-3.5 px-5 font-semibold">تفاصيل الوحدة والموقع</th>
+<th class="py-3.5 px-4 font-semibold">المالك والترخيص</th>
+<th class="py-3.5 px-4 font-semibold">تقرير الفحص الميداني</th>
+<th class="py-3.5 px-4 font-semibold">معاينة الصور والتوثيق</th>
+<th class="py-3.5 px-4 font-semibold">الحالة الحالية</th>
+<th class="py-3.5 px-5 font-semibold text-center">إجراءات الاعتماد</th>
+</tr>
+</thead>
+<tbody class="divide-y-0 text-body-sm font-body-sm">
+<!-- Row 1: Dokki Apartment -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-14 h-14 rounded-xl object-cover shadow-sm flex-shrink-0" data-alt="Modern spacious student shared apartment in Dokki with warm lighting, study desks, clean beds, and tiled floors in contemporary Cairo residential building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOWZdNbUBiUNbvCghLrFDDpSjJGX0Z1Q_hYIZjIZwlP-Rq87NdZkQNKgfcscYchnZ_x18pVs2L61tT3bV9ALDMI9pLCl-VWXLjvCKZ4MaBsaKu0bu2LTxljWTooRWo3t4F7Z3PCDznbZtaWC4IM0ncisFphiUPuTLSfVAukVNwAsCEZ45wH9a9rZZsx-HKQgsfLdc0RUnMUeXfkQ3_572epCPQHZtZ70WJpPs7UW4">
+<div class="space-y-0.5">
+<div class="font-bold text-on-surface text-label-md font-label-md flex items-center gap-1.5">
+<span class="">شقة النيل للطلاب - الطابق الرابع</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-medium bg-primary/10 text-primary">طلاب</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-muted text-caption font-caption">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">الدقي، بالقرب من محطة المترو وجامعة القاهرة</span>
+</div>
+<span class="text-caption font-caption font-bold text-primary">2,800 ج.م / سرير</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="space-y-0.5">
+<span class="font-semibold text-on-surface block">م. حسام الدين فاروق</span>
+<span class="text-caption font-caption text-text-muted block">عقد إيجار + صك ملكية ساري</span>
+<span class="inline-flex items-center gap-1 text-[11px] text-status-approved font-medium">
+<span class="material-symbols-outlined text-[13px]">verified</span> مالك مؤكد
+                </span>
+</div>
+</td>
+<td class="py-4 px-4 max-w-xs">
+<div class="p-2.5 rounded-xl bg-surface-container-low space-y-1">
+<div class="flex items-center justify-between text-caption font-caption">
+<span class="font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">shield</span> تقييم ممتاز (4.8/5)
+                  </span>
+<span class="text-text-muted text-[11px]">المفتش: طارق سامي</span>
+</div>
+<p class="text-caption font-caption text-on-surface-variant line-clamp-2">
+                  الشقة نظيفة جداً، طفايات الحريق متوفرة، الأقفال الذكية مثبتة على الأبواب، سرعة النت 70 ميجا.
+                </p>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center -space-x-2 space-x-reverse cursor-pointer group" onclick="document.getElementById('galleryModal').classList.remove('hidden')">
+<img class="w-9 h-9 rounded-lg object-cover ring-2 ring-surface shadow-sm" data-alt="Student room interior showing single wooden bed with fresh linens and study lamp on modern clean desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMd8X6pDD5bcp9Jb6NRnLMG3IyPxbqq3Jm-9XlnMXlEtFJFg1dRsLg8N2nqgIrvrnVanLg7p6Ca03GfdbErxCNBQ881DXmKpFRkOh0md-1U8nxmyWcoHjKoURuQUfeC93ArtmVxAxo72w8e2r_M5tpxngz8CRhBiMRlm2RzxFtlfagtmPRkbQLs8DugVfz3rnvD3BpruoozZwtrIDJLlJ_JyFsgfUxSzbpwxVlryA">
+<img class="w-9 h-9 rounded-lg object-cover ring-2 ring-surface shadow-sm" data-alt="Pristine modern bathroom inside renovated Cairo rental unit with spotless tiles and modern plumbing" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtp_JjLOON6D_6DN-sAeRSO2-CUWLdhmEafvJYpmuiMN3OOHopC5z8gcdAy2f1eL9nN2O_nxCWndXBPzkT_OSpvI5jN8SKNMkj2szzU4w4MzMfv7_p8RAIKtmiRDz8zfk0juY6IKgocLzEJOfelhI6Fl9DyujyEEDz9WW_Mbgn8VwvNhjru_JX-5NOm-9X_nWnnXDFRwQDYwKV2_2U6yhEZLkVBNIGx_82YDx05hY">
+<img class="w-9 h-9 rounded-lg object-cover ring-2 ring-surface shadow-sm" data-alt="Kitchenette inside student living quarter with microwave, refrigerator, and organized pantry" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGmVpAoBTr8vXKRhYQjhYsgRIVhm2iVglAklbkSbxb5mG5rdLRzAyWqMs1tufVy4j-wbTpPqk0ZAuXGxnJ69YYUTgs1PHzWEPcbFUT6fM0bCtjusphd5hbcYrUTPr9SaNaoBMgNAC22Lpy3t9hbSfewYLKzL5PLMc3oIz0X8v0BWyWZhtHrCn1TMqB6v3MDAC6_BHJjdO7Vj2MIznRDixXs0Y0SK0wztqhFg4uXjM">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center text-caption font-caption font-bold shadow-sm">
+                  +6
+                </div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-label-sm font-label-sm bg-status-pending/10 text-status-pending font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-pending"></span>
+                بانتظار موافقة القائد
+              </span>
+</td>
+<td class="py-4 px-5">
+<div class="flex items-center justify-center gap-1.5">
+<button class="p-2 rounded-xl bg-status-approved text-on-primary hover:opacity-90 shadow-sm transition-transform active:scale-95 flex items-center gap-1 text-label-sm font-label-sm px-3" title="اعتماد وتوثيق رسمي">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">اعتماد</span>
+</button>
+<button class="p-2 rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('evaluationModal').classList.remove('hidden')" title="طلب تعديلات وملاحظات">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="p-2 rounded-xl bg-status-rejected/10 text-status-rejected hover:bg-status-rejected/20 transition-colors" title="رفض الوحدة">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Nasr City Apartment -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-14 h-14 rounded-xl object-cover shadow-sm flex-shrink-0" data-alt="Bright student female housing apartment living area in Nasr City with contemporary cozy couches and study room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE79uG3wa0KfpBF2lBi7TApkvM63dHSe9aYHZZdDQzDrLRW-RHIRABBMihqqtDTUS5ZsZRHhZUhIuGp7rS4h0NMvNGH92X0B2lMiDIk8qzeij1voKlhq6mmETrLkueFYgfYuEJmYpVd3s-_f23Z77xentHZR0nvhuvqQsioqdc0NjlUGT2FfQu8iPLR_jX0qaUmDxAcgl35Q_B8T2qJgS7kar5cCKqpgmkCj9ewmw">
+<div class="space-y-0.5">
+<div class="font-bold text-on-surface text-label-md font-label-md flex items-center gap-1.5">
+<span class="">جناح الرواد - سكن طالبات</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-medium bg-secondary/15 text-secondary">طالبات</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-muted text-caption font-caption">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">مدينة نصر، مكرم عبيد قرب جامعة الأزهر</span>
+</div>
+<span class="text-caption font-caption font-bold text-primary">3,200 ج.م / سرير</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="space-y-0.5">
+<span class="font-semibold text-on-surface block">أ. منى الشريف</span>
+<span class="text-caption font-caption text-text-muted block">توكيل رسمي + سجل تجاري لإدارة السكن</span>
+<span class="inline-flex items-center gap-1 text-[11px] text-status-approved font-medium">
+<span class="material-symbols-outlined text-[13px]">verified</span> مالك مؤكد
+                </span>
+</div>
+</td>
+<td class="py-4 px-4 max-w-xs">
+<div class="p-2.5 rounded-xl bg-status-pending/10 space-y-1">
+<div class="flex items-center justify-between text-caption font-caption">
+<span class="font-bold text-status-pending flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">warning</span> ملاحظات معلقة (3.4/5)
+                  </span>
+<span class="text-text-muted text-[11px]">المفتش: سارة محمود</span>
+</div>
+<p class="text-caption font-caption text-on-surface-variant line-clamp-2">
+                  الأمان ممتاز وكاميرات المراقبة تعمل، لكن يلزم صيانة مكيف الغرفة الشرقية وتوفير خزانة إضافية.
+                </p>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center -space-x-2 space-x-reverse cursor-pointer">
+<img class="w-9 h-9 rounded-lg object-cover ring-2 ring-surface shadow-sm" data-alt="Double bed student dorm room with natural morning light and study corner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbINageKpw9PmJtCJdmssIeXrWIMDzQXUyqdLcgiCOaXDj2VI0L-QMOT8d7vhDjZZ-ekv-IOQUJf0r89JEIB6a_aqKMKnaS5cEkhQR_hOsYCcD4pxX1M1crz_LB5O2YD9G36oyReZYt1xd-5ZObcGJ2KlvsyoaozVhjeL0cfSMXtQazm8ctr_H6lG2Cl60vbUjvZ3XvWadG9Y5h-QNE-l-5zjpfJgC-YZGUYSGmxU">
+<img class="w-9 h-9 rounded-lg object-cover ring-2 ring-surface shadow-sm" data-alt="Building security gate and secure entrance foyer with intercom keypad in residential district" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDph-pPYYMwLVGqljRjoMB07PIqBLXaA7DEuBw9z1148nq3xdZMPCU650tOeIJlIYf1qGpKbTz3u4Yuq6pncT-yRArt9_2TV7SMlurGLcg0KKHw1TcuHbKRB_IlkYcpWvrZlyuGgf8WwXPNx2FVqeWeWUxww00qBLopR3QrZH_lcfEKIHWVoHBRNamxS6RJr3v3uhHfA0x-jNqV4VI9Utq-wVHgyvjddl17Bw5_pbo">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center text-caption font-caption font-bold shadow-sm">
+                  +4
+                </div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-label-sm font-label-sm bg-status-pending/15 text-status-pending font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-pending"></span>
+                ملاحظات بانتظار الرد
+              </span>
+</td>
+<td class="py-4 px-5">
+<div class="flex items-center justify-center gap-1.5">
+<button class="p-2 rounded-xl bg-surface-container-low text-primary hover:bg-surface-container transition-colors text-label-sm font-label-sm px-3 flex items-center gap-1" title="إعادة الفحص الميداني">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+<span class="">إعادة فحص</span>
+</button>
+<button class="p-2 rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('evaluationModal').classList.remove('hidden')" title="طلب تعديلات تفصيلية">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="p-2 rounded-xl bg-status-rejected/10 text-status-rejected hover:bg-status-rejected/20 transition-colors" title="رفض الوحدة">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Bein El Sarayat Unit -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<img class="w-14 h-14 rounded-xl object-cover shadow-sm flex-shrink-0" data-alt="Cozy student apartment in Bein El Sarayat Giza directly opposite university gates with clean floor and shared lounge" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFaweOoUAvLjF2N-ooupi7gUOoTZoBxDWiEek9c3KpgQqyDt0QJ0Mb2sYBzoNSBMK9z0izKbQZlioar1To-xbi5sXwTq9canFZd2FGmk-y8j2PtqK93P8xboFOULOF2mLvFXGolZhzivfxECpFVtEFw_0DwvqRZRKubuUjtdAJmTBWJ-XDnyjgtKpb0hyqiZ81n7V32q8F_kVocb6FKnePvqkcwFJYtg6k-0fjRPg">
+<div class="space-y-0.5">
+<div class="font-bold text-on-surface text-label-md font-label-md flex items-center gap-1.5">
+<span class="">استوديو الجامعة النموذجي</span>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-medium bg-primary/10 text-primary">طلاب</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-muted text-caption font-caption">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="">بين السرايات، الجيزة (خطوات من بوابة هندسة)</span>
+</div>
+<span class="text-caption font-caption font-bold text-primary">2,100 ج.م / سرير</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="space-y-0.5">
+<span class="font-semibold text-on-surface block">الحاج كمال رضوان</span>
+<span class="text-caption font-caption text-text-muted block">عقد إيجار قديم + موافقة الوصاية</span>
+<span class="inline-flex items-center gap-1 text-[11px] text-status-pending font-medium">
+<span class="material-symbols-outlined text-[13px]">hourglass_top</span> تدقيق قانوني
+                </span>
+</div>
+</td>
+<td class="py-4 px-4 max-w-xs">
+<div class="p-2.5 rounded-xl bg-surface-container-low space-y-1">
+<div class="flex items-center justify-between text-caption font-caption">
+<span class="font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">check_circle</span> مطابقة تامة (4.6/5)
+                  </span>
+<span class="text-text-muted text-[11px]">المفتش: طارق سامي</span>
+</div>
+<p class="text-caption font-caption text-on-surface-variant line-clamp-2">
+                  تم التأكد من سلامة تمديدات الغاز والتهوية الجيدة، الأسرّة جديدة ومريحة، تم فحص سرعة شبكة الواي فاي.
+                </p>
+</div>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center -space-x-2 space-x-reverse cursor-pointer">
+<img class="w-9 h-9 rounded-lg object-cover ring-2 ring-surface shadow-sm" data-alt="Single studio bedroom with ergonomic study desk and clean tiled balcony" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLHlSEdWtqB3jou5Zr3PcrRqrk0pdEsaWG1H6v_vM4zKgCTBNPyAC6qGwnYAM26dB1b97A3EUiKuDddN8wiK-sdbs24J1smNv4h21JFajj-N69FXQ63peFBuv1kkra8xbc0xwQM5Cjk2-tIZpi_1vPidi7TyPBFh1RNDXBpsQ1BALTJ0DoBygLqVn9lOjQkLQNLdmmhqCzlxaofT2MlI9ZHKlpQbTBi7eVzkHqXk0">
+<img class="w-9 h-9 rounded-lg object-cover ring-2 ring-surface shadow-sm" data-alt="Modern clean apartment kitchen with electric kettle and built-in stove" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS1JwTMzhzauKXpchEwfR64_4OLf5LtICj6BEmPXBkluk-vsBGB3rOjjD-pKBeFcNO-jYLbtLfDWxIK2hcB3H-i38D0VBqAn5dp7Q4Ynph0GC9XAXXiBAyGaXtonR2yXRUx-BmSA-8WnS4uSK0k_Wdk8CeJX7aRUJGZanqOsrZSGmLDLwnOjO8EuxPe-RkD76keKTZ6W27w9N5BYFcHvpRkbZZ0gvzxdXERao-mZk">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary flex items-center justify-center text-caption font-caption font-bold shadow-sm">
+                  +5
+                </div>
+</div>
+</td>
+<td class="py-4 px-4">
+<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-label-sm font-label-sm bg-status-approved/15 text-status-approved font-semibold">
+<span class="w-2 h-2 rounded-full bg-status-approved"></span>
+                جاهز للاعتماد النهائي
+              </span>
+</td>
+<td class="py-4 px-5">
+<div class="flex items-center justify-center gap-1.5">
+<button class="p-2 rounded-xl bg-status-approved text-on-primary hover:opacity-90 shadow-sm transition-transform active:scale-95 flex items-center gap-1 text-label-sm font-label-sm px-3" title="اعتماد وتوثيق رسمي">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="">اعتماد</span>
+</button>
+<button class="p-2 rounded-xl bg-surface-container-low text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('evaluationModal').classList.remove('hidden')" title="طلب تعديل وملاحظات">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+</button>
+<button class="p-2 rounded-xl bg-status-rejected/10 text-status-rejected hover:bg-status-rejected/20 transition-colors" title="رفض الوحدة">
+<span class="material-symbols-outlined text-[18px]">block</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination / Footer -->
+<div class="p-4 bg-surface-container-low/20 flex flex-col sm:flex-row items-center justify-between gap-3 text-caption font-caption text-text-muted">
+<span class="">عرض 3 من أصل 14 وحدة تنتظر التوثيق والاعتماد</span>
+<div class="flex items-center gap-1">
+<button class="p-1.5 rounded-lg bg-surface hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<span class="px-3 py-1 bg-primary text-on-primary rounded-lg font-bold">1</span>
+<button class="px-3 py-1 rounded-lg bg-surface hover:bg-surface-container transition-colors">2</button>
+<button class="px-3 py-1 rounded-lg bg-surface hover:bg-surface-container transition-colors">3</button>
+<button class="p-1.5 rounded-lg bg-surface hover:bg-surface-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Dual Layout: Student IDs Fast-Track Verification & Field Team Schedule -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Section 1: Pending Student IDs Fast Approval (8 Cols) -->
+<div class="lg:col-span-8 bg-surface p-6 rounded-2xl shadow-sm space-y-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2.5 bg-secondary-fixed text-on-secondary-fixed rounded-xl">
+<span class="material-symbols-outlined text-[22px]">school</span>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">توثيق هويات وكارنيهات الطلاب</h2>
+<p class="text-caption font-caption text-text-muted">مطابقة البطاقة الشخصية والكارنيه الجامعي لتفعيل ميزة الحجز الفوري</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-secondary-fixed/50 text-on-secondary-fixed-variant rounded-full text-label-sm font-label-sm font-semibold">
+          4 طلبات مستعجلة
+        </span>
+</div>
+<div class="space-y-4">
+<!-- Student Card Item 1 -->
+<div class="p-4 rounded-xl bg-surface-container-low/40 hover:bg-surface-container-low transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Passport style formal profile portrait photo of an Egyptian male university student with glasses smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYhtCJIr6vsHS4hCbSQbh4UskNLD3W669t0cUjCgwOSeUI9VnxnHGCcwTqi5wscmiJ1E5POTsxtFNyEvMGciGQNdpZUzSz9uL-va1FAylWFiHK8oPt844q0_42aT9klIBaXLio9pSxkN1J8kVOVZM0m1botSuvus6aVBBCJWceMuGlRy3LAqLZWs1r0TmxhFEqzDpsg0VOuJLLfyEQDL-XggR7KcRkagJJe3Yajv0">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-bold text-on-surface text-label-md font-label-md">أحمد سامح عبد الرحمن</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface text-primary shadow-xs">
+                  جامعة القاهرة - كلية الهندسة
+                </span>
+</div>
+<div class="flex items-center gap-3 text-caption font-caption text-text-muted">
+<span class="">الرقم القومي: 3010415010****</span>
+<span class="">•</span>
+<span class="">الفرقة: الثالثة (قسم مدني)</span>
+</div>
+</div>
+</div>
+<!-- Document Thumbnails -->
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-caption font-caption text-on-surface shadow-sm hover:bg-surface-container transition-colors" title="معاينة بطاقة الرقم القومي">
+<span class="material-symbols-outlined text-[16px] text-primary">credit_card</span>
+<span class="">البطاقة (الوجهين)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-caption font-caption text-on-surface shadow-sm hover:bg-surface-container transition-colors" title="معاينة كارنيه الكلية">
+<span class="material-symbols-outlined text-[16px] text-secondary">badge</span>
+<span class="">كارنيه 2024</span>
+</button>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2 self-end md:self-auto">
+<button class="px-3.5 py-1.5 rounded-xl bg-status-approved text-on-primary text-label-sm font-label-sm shadow-sm hover:opacity-90 transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">توثيق الهوية</span>
+</button>
+<button class="p-1.5 rounded-xl bg-status-rejected/10 text-status-rejected hover:bg-status-rejected/20 transition-colors" title="رفض المستند">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Student Card Item 2 -->
+<div class="p-4 rounded-xl bg-surface-container-low/40 hover:bg-surface-container-low transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Passport style formal profile photo of young female student wearing hijab with bright optimistic expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIJq3V88xe8y_ole98OaCtpLqQ6QnqaBztSr1PZYbGzUB7gXXnNh-W-F-TuGxFka0hCfbr0Ekz7IBQSh43GFTPOqg_lGIkticGHBYk8v8HyCZBQx4iwOt8yYE8KJSf1iWeyFyAYMSm72DcKJalP3COn4i3bpWuJyQXf8Jad16wE3aofiSmu4hKU-jC5HYf-LbD_GXCzHFiCNK9cUaxInsuEO6qeNr0Ci-p6Ru8SKs">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-bold text-on-surface text-label-md font-label-md">مريم خالد الشربيني</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface text-primary shadow-xs">
+                  جامعة عين شمس - كلية الألسن
+                </span>
+</div>
+<div class="flex items-center gap-3 text-caption font-caption text-text-muted">
+<span class="">الرقم القومي: 3020921020****</span>
+<span class="">•</span>
+<span class="">الفرقة: الأولى (إسباني)</span>
+</div>
+</div>
+</div>
+<!-- Document Thumbnails -->
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-caption font-caption text-on-surface shadow-sm hover:bg-surface-container transition-colors" title="معاينة بطاقة الرقم القومي">
+<span class="material-symbols-outlined text-[16px] text-primary">credit_card</span>
+<span class="">البطاقة (الوجهين)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-caption font-caption text-on-surface shadow-sm hover:bg-surface-container transition-colors" title="معاينة إيصال المصروفات">
+<span class="material-symbols-outlined text-[16px] text-secondary">receipt_long</span>
+<span class="">إيصال القيد الجامعي</span>
+</button>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2 self-end md:self-auto">
+<button class="px-3.5 py-1.5 rounded-xl bg-status-approved text-on-primary text-label-sm font-label-sm shadow-sm hover:opacity-90 transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">توثيق الهوية</span>
+</button>
+<button class="p-1.5 rounded-xl bg-status-rejected/10 text-status-rejected hover:bg-status-rejected/20 transition-colors" title="رفض المستند">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+<!-- Student Card Item 3 -->
+<div class="p-4 rounded-xl bg-surface-container-low/40 hover:bg-surface-container-low transition-colors flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-3.5">
+<img class="w-12 h-12 rounded-full object-cover shadow-sm flex-shrink-0" data-alt="Frontal portrait photo of young male university student in Cairo wearing polo shirt looking focused" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU8tW3ktHbTvLAFV9E_3nHnadbPjCZMNXSzDgg_ulbhnHwu6Z3xX8VSXPlwa7PhwgHCHPbX_9X1vw5GMoYH1giRAOM9DXoyM-Ot8fbrGruED-8WI6WjA_Ad4VT9YQ12wQ1_AUtFTNbwZLwTFSqAqhB2pBnAw4OiJw8FbRSWl0gXzkYM-IRaPvMwXzZkjoonNZScAKjrH9RoMtaSA7_UneJDYo2TYbuipYM8VRlWzc">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-bold text-on-surface text-label-md font-label-md">عمر ياسر الحفني</span>
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-surface text-primary shadow-xs">
+                  جامعة حلوان - حاسبات ومعلومات
+                </span>
+</div>
+<div class="flex items-center gap-3 text-caption font-caption text-text-muted">
+<span class="">الرقم القومي: 3001103010****</span>
+<span class="">•</span>
+<span class="">الفرقة: الرابعة (علوم حاسب)</span>
+</div>
+</div>
+</div>
+<!-- Document Thumbnails -->
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-caption font-caption text-on-surface shadow-sm hover:bg-surface-container transition-colors" title="معاينة بطاقة الرقم القومي">
+<span class="material-symbols-outlined text-[16px] text-primary">credit_card</span>
+<span class="">البطاقة (الوجهين)</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface text-caption font-caption text-on-surface shadow-sm hover:bg-surface-container transition-colors" title="معاينة كارنيه الكلية">
+<span class="material-symbols-outlined text-[16px] text-secondary">badge</span>
+<span class="">كارنيه 2024</span>
+</button>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2 self-end md:self-auto">
+<button class="px-3.5 py-1.5 rounded-xl bg-status-approved text-on-primary text-label-sm font-label-sm shadow-sm hover:opacity-90 transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">توثيق الهوية</span>
+</button>
+<button class="p-1.5 rounded-xl bg-status-rejected/10 text-status-rejected hover:bg-status-rejected/20 transition-colors" title="رفض المستند">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Field Inspectors Daily Schedule & Map Radar (4 Cols) -->
+<div class="lg:col-span-4 bg-surface p-6 rounded-2xl shadow-sm space-y-5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="p-2 bg-primary-container text-on-primary rounded-xl">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">جدول الزيارات الميدانية</h2>
+</div>
+<span class="text-caption font-caption text-text-muted">اليوم: الأحد</span>
+</div>
+<!-- Field Map Mini Widget -->
+<div class="w-full h-36 bg-cover bg-center rounded-xl shadow-inner relative overflow-hidden flex items-end p-3" data-location="Dokki, Giza, Egypt" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9f9i_e0hZvZXCt5vgQBzRMjZzjAhQi113Hj89VNHYZeoRBeCVUV72uAG2OLrqcQi07nzRR9pOAAMMuT4MFLwV43lZKGof9LJP7A5teggvKWgmoXN43l4z5UUMqHKHdxJrf21hboE7RXf4qrsHCOxg19pAU_-M5RglEgp1jaJU1KWlN3bAQLObunRIWh0GLbHPRDYZxsQwta60eJK8RSjePckbyS3OsQegZXuZNr4')">
+<div class="bg-surface/90 backdrop-blur-md px-3 py-1.5 rounded-lg text-caption font-caption font-semibold text-primary flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-status-approved animate-ping"></span>
+<span class="">فريق التفتيش (منطقة الدقي وجامعة القاهرة)</span>
+</div>
+</div>
+<!-- Schedule Timeline -->
+<div class="space-y-3">
+<!-- Visit 1 -->
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50">
+<div class="w-9 h-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center font-bold text-caption font-caption">
+            10:30
+          </div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-on-surface text-label-md font-label-md truncate">فحص شقة مصدق - الدقي</h4>
+<p class="text-caption font-caption text-text-muted">المفتش: طارق سامي • منجز</p>
+</div>
+<span class="text-status-approved material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<!-- Visit 2 -->
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50">
+<div class="w-9 h-9 rounded-lg bg-status-pending/15 text-status-pending flex items-center justify-center font-bold text-caption font-caption">
+            01:15
+          </div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-on-surface text-label-md font-label-md truncate">سكن الأمل للطالبات - عباس العقاد</h4>
+<p class="text-caption font-caption text-text-muted">المفتش: سارة محمود • جاري الآن</p>
+</div>
+<span class="text-status-pending material-symbols-outlined text-[20px] animate-spin">sync</span>
+</div>
+<!-- Visit 3 -->
+<div class="flex items-center gap-3 p-3 rounded-xl bg-surface-container-low/50 opacity-80">
+<div class="w-9 h-9 rounded-lg bg-surface-container text-text-muted flex items-center justify-center font-bold text-caption font-caption">
+            03:45
+          </div>
+<div class="flex-1 min-w-0">
+<h4 class="font-bold text-on-surface text-label-md font-label-md truncate">وحدة شارع مراد - الجيزة</h4>
+<p class="text-caption font-caption text-text-muted">المفتش: مروان فوزي • مجدول</p>
+</div>
+<span class="text-text-muted material-symbols-outlined text-[20px]">schedule</span>
+</div>
+</div>
+<!-- Quick assign inspector trigger -->
+<button class="w-full py-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container text-primary font-label-md text-label-md flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span class="">تعيين زيارة تفتيش لمفتش آخر</span>
+</button>
+</div>
+</div>
+<!-- Inspection Criteria Modal Form (Modal State Controlled by JS/Attributes) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-on-surface/40 backdrop-blur-sm p-4" id="evaluationModal">
+<div class="bg-surface w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+<!-- Modal Header -->
+<div class="p-5 bg-surface-container-low/50 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="p-2 bg-primary/10 text-primary rounded-xl">
+<span class="material-symbols-outlined text-[22px]">checklist</span>
+</span>
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">نموذج تقييم المفتش والملاحظات الفنية</h3>
+<p class="text-caption font-caption text-text-muted">شقة النيل للطلاب - كود الوحدة #WJH-8402</p>
+</div>
+</div>
+<button class="p-1.5 rounded-lg text-text-muted hover:bg-surface-container transition-colors" onclick="document.getElementById('evaluationModal').classList.add('hidden')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body: Core Checklist with Star Criteria -->
+<div class="p-6 space-y-6 max-h-[75vh] overflow-y-auto">
+<!-- Criteria Ratings -->
+<div class="space-y-4">
+<h4 class="text-label-md font-label-md text-on-surface font-bold">بنود الفحص الأساسية (معايير وجهة للسلامة والراحة)</h4>
+<!-- Item 1: Safety & Building Security -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/30">
+<div>
+<span class="font-bold text-on-surface text-label-md font-label-md block">أمان البناية والأقفال</span>
+<span class="text-caption font-caption text-text-muted">سلامة الأبواب، وجود حارس أو كاميرات، مخارج الطوارئ</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<!-- Item 2: Furniture & Appliance Quality -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/30">
+<div>
+<span class="font-bold text-on-surface text-label-md font-label-md block">جودة الأثاث والمراتب</span>
+<span class="text-caption font-caption text-text-muted">نظافة المراتب، المكاتب الدراسية، سلامة الخزائن</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]">star</span>
+</div>
+</div>
+<!-- Item 3: Internet & Utilities -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/30">
+<div>
+<span class="font-bold text-on-surface text-label-md font-label-md block">سرعة الإنترنت والمرافق</span>
+<span class="text-caption font-caption text-text-muted">سرعة الواي فاي الفعلية، ضغط المياه، السخان، والغاز</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]">star_half</span>
+</div>
+</div>
+<!-- Item 4: Specification Matching -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low/30">
+<div>
+<span class="font-bold text-on-surface text-label-md font-label-md block">مطابقة الصور للواقع</span>
+<span class="text-caption font-caption text-text-muted">دقة الصور المرفوعة من المالك مقارنة بالمعاينة الحية</span>
+</div>
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<!-- Technical Team Notes to Owner -->
+<div class="space-y-2">
+<label class="text-label-md font-label-md text-on-surface font-bold block">
+            الملاحظات الفنية الموجهة لمالك الوحدة قبل النشر:
+          </label>
+<textarea class="w-full p-3.5 bg-surface-container-low/40 rounded-xl text-body-sm font-body-sm text-on-surface outline-none focus:ring-2 focus:ring-primary/20 placeholder:text-text-muted" placeholder="اكتب الملاحظات بدقة (مثال: نرجو إضافة ستائر حاجبة لغرفة النوم الأولى وتغيير مفتاح الإنارة في الممر قبل التوثيق النهائي)..." rows="3">تم التأكد من كل التجهيزات. تم التوجيه بضرورة توفير مفتاح إضافي لبوابة العقار لكل طالب وتجهيز مساحة الدراسة المشتركة بالمقبس الكهربائي المفقود.</textarea>
+</div>
+<!-- Final Field Decision Selection -->
+<div class="space-y-2">
+<label class="text-label-md font-label-md text-on-surface font-bold block">
+            قرار المفتش / القائد الميداني:
+          </label>
+<div class="grid grid-cols-3 gap-3">
+<label class="flex items-center justify-center gap-2 p-3 rounded-xl bg-status-approved/10 text-status-approved font-label-md text-label-md cursor-pointer hover:bg-status-approved/20 transition-colors">
+<input checked="" class="accent-status-approved" name="decision" type="radio">
+<span class="">اعتماد رسمي (شارة موثّق)</span>
+</label>
+<label class="flex items-center justify-center gap-2 p-3 rounded-xl bg-status-pending/10 text-status-pending font-label-md text-label-md cursor-pointer hover:bg-status-pending/20 transition-colors">
+<input class="accent-status-pending" name="decision" type="radio">
+<span class="">طلب تعديل وملاحظات</span>
+</label>
+<label class="flex items-center justify-center gap-2 p-3 rounded-xl bg-status-rejected/10 text-status-rejected font-label-md text-label-md cursor-pointer hover:bg-status-rejected/20 transition-colors">
+<input class="accent-status-rejected" name="decision" type="radio">
+<span class="">رفض الوحدة</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="p-4 bg-surface-container-low/50 flex items-center justify-end gap-3">
+<button class="px-5 py-2.5 rounded-xl bg-surface text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors" onclick="document.getElementById('evaluationModal').classList.add('hidden')">
+          إلغاء
+        </button>
+<button class="px-6 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-md text-label-md shadow-md hover:opacity-95 transition-all" onclick="document.getElementById('evaluationModal').classList.add('hidden')">
+          حفظ واعتماد التقرير الميداني
+        </button>
+</div>
+</div>
+</div>
+<!-- Gallery Lightbox Modal -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center bg-on-surface/60 backdrop-blur-md p-4" id="galleryModal">
+<div class="bg-surface w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden p-6 space-y-4">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">معاينة صور التفتيش الميداني</h3>
+<p class="text-caption font-caption text-text-muted">تم التقاطها عبر تطبيق مفتش وجهة الميداني مع بصمة التوقيت والموقع</p>
+</div>
+<button class="p-2 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface" onclick="document.getElementById('galleryModal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<div class="md:col-span-2">
+<img class="w-full h-80 rounded-xl object-cover shadow-sm" data-alt="High resolution detailed photo of apartment living room and study zone taken by inspector showing cleanliness and furniture arrangement" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdhGELboM5o1Ju0YK3fftBYbB8GL1otChIpyKizSdEsSgrAg7GiEP8q7v9fkUiJx4IyMtKwuEMTxdRWt-uLZGNEd0dHbwUYBsN3fy7N_xwZyYje3IwQYPHm4IGCcyramBLbz2YvoMPZt85tuTrf_mkyJP-kaaqM-ESxI-IhcVcSDU5UvjOiG9zQ60SQYTtamkN_38Ckt2U8yqXKyjr_LgRMiu1dCX27FWY_9WzkIU">
+</div>
+<div class="grid grid-cols-2 md:grid-cols-1 gap-3">
+<img class="w-full h-[154px] rounded-xl object-cover shadow-sm" data-alt="Close up photo of high speed modern router speed test showing 70 Mbps download speed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-f9XUyrLX-vCpQY5A-mANIgv01hpgRzoR8y2RU1zhnB9GNSROYzqTFMUDp_hWUpAGlNqUv9sDB1cjE3DvQZPdUA-nJCwtFB43dranC8osXHZKMktBTDGtCvTp-DZNLIAr7UTu9OBzHu4cNW1BxBSSG0aeQhXMouAwogsuGwTPFcEkiFXQwIcFL_7s8lDGw1jP-GflAS0qzON_LsCx9nbGZiddm-QfPhdI-vgZ_C8">
+<img class="w-full h-[154px] rounded-xl object-cover shadow-sm" data-alt="Clean and hygienic bathroom photo showing shower installation and clean water fixtures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGN9dqXxgmfpygLi8yMMdS9t82I24vY_om49b8SZp42UxQoIop57KoF-LpnEkP_GHQdkFbkqZ79WJuQrmhI-fHRefjr24JO5W4U3tLEmpDVVjFa7aWaEd4VAPNRuTMbw9rc6gKSdLrzeHu9pdmshpkrxQbmpZvkKzpwVY8vt_KdGE0R6IG1Bh6ObLu5ZLW3U-8uDGXP1sYDSfyk-QICFj9-FwxueNzSrR5L1G0ZLw">
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="text-caption font-caption text-status-approved font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+          تم التحقق الميداني بواسطة الـ GPS في الموقع الفعلي
+        </span>
+<button class="px-5 py-2 rounded-xl bg-primary text-on-primary font-label-md text-label-md shadow-sm" onclick="document.getElementById('galleryModal').classList.add('hidden')">
+          إغلاق المعاينة
+        </button>
+</div>
+</div>
+</div>
+</div></main></div>
+
+</body></html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="ar"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary-container": "#0f766e", "outline-variant": "#bdc9c6", "on-tertiary-fixed-variant": "#005142", "primary": "#005c55", "surface-container-low": "#eff4ff", "surface-dim": "#d0dbed", "tertiary-container": "#0b7763", "border-subtle": "#D6E4E0", "tertiary-fixed": "#9af3da", "secondary-fixed-dim": "#ffb59e", "primary-fixed": "#9cf2e8", "on-surface-variant": "#3e4947", "status-rejected": "#C0392B", "surface-container-highest": "#d9e3f6", "tertiary-fixed-dim": "#7ed7bf", "surface-tint": "#006a63", "tertiary": "#005c4c", "secondary-container": "#fc9a7b", "on-tertiary-container": "a1fbe2", "secondary": "#95482f", "surface-container-high": "#dee9fc", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "on-tertiary-fixed": "#002019", "on-secondary-fixed": "#3a0b00", "on-primary-fixed-variant": "#00504a", "surface": "#FFFFFF", "on-surface": "#121c2a", "text-muted": "#6B7280", "on-primary-container": "#a3faef", "surface-container": "#e6eeff", "surface-variant": "#d9e3f6", "on-background": "#121c2a", "inverse-on-surface": "#eaf1ff", "on-secondary-fixed-variant": "#77311a", "surface-container-lowest": "#ffffff", "on-primary-fixed": "#00201d", "surface-bright": "#f8f9ff", "primary-fixed-dim": "#80d5cb", "on-error-container": "#93000a", "error": "#ba1a1a", "page-bg": "#F4FBF9", "background": "#f8f9ff", "on-error": "#ffffff", "outline": "#6e7977", "error-container": "#ffdad6", "status-approved": "#2E9E6B", "secondary-fixed": "#ffdbd0", "on-secondary": "#ffffff", "on-secondary-container": "#753019", "inverse-surface": "#27313f", "status-pending": "#E0A100", "inverse-primary": "#80d5cb" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin": "2rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.75rem", "space-xs": "0.5rem", "space-md": "1rem", "space-lg": "1.5rem", "margin-mobile": "1rem", "space-xl": "2rem" }, fontFamily: { "label-sm": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "caption": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-xl": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"] }, fontSize: { "label-sm": ["12px", { lineHeight: "18px", fontWeight: "500" }], "body-lg": ["16px", { lineHeight: "28px", fontWeight: "400" }], "headline-lg": ["22px", { lineHeight: "38px", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "30px", fontWeight: "600" }], "caption": ["13px", { lineHeight: "22px", fontWeight: "400" }], "body-sm": ["14px", { lineHeight: "24px", fontWeight: "400" }], "headline-xl": ["32px", { lineHeight: "54px", fontWeight: "700" }], "headline-xl-mobile": ["28px", { lineHeight: "48px", fontWeight: "700" }], "label-md": ["14px", { lineHeight: "22px", fontWeight: "600" }], "headline-lg-mobile": ["20px", { lineHeight: "34px", fontWeight: "700" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;font-family:'Plus Jakarta Sans',sans-serif;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-page-bg font-body-sm text-body-sm text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(15,118,110,0.05)] pt-safe"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><img alt="وجهة - Wijha" class="h-9 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCJbEV-19RtkxKUsrgYmzuO3RJRnHNr8disSUHmtZlX1m4CNWzDKeiVIpXPpnoqX8sLpgI8_Llzn6zcy1gDUE4iFTCQUXg1PPcMtCErQDVgx9H2FFry7b4Z8nmzimgURek9khELALZjqmatq4EfQIlpcJwW-beE8jb_EQerwQU3n0LP9AVIJvAUL-DQ9_fRdsDQBWO1oYWCcRbzKGXryTzlNB5OkWb8UPl7xOVY_MzZb2dgTgAiXDk"/></div><div class="flex items-center gap-space-xs"><button aria-label="التنبيهات والإشعارات" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors"><span class="material-symbols-outlined text-[24px]">notifications</span></button><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/20" src="https://lh3.googleusercontent.com/aida/AEtjO1V693vXQ_FOE__hjCGibKhnsfCz9_w3iNAfzCIPuQImHefIV86S8zKObqejuEEVxw_9qqe_2QOkM4FgcSoBDve2ziI878Cxp4I51MWby52tFN4Nq-326XNR-zkQdrIYsJ53WF7IPHg402YjOAzqgOCYOHz9ytvI10Jr0RgralKRbu98TyDCUffunFaJdrm9q9sWgYq5HIrkzhTUJMW5xkfGn0wqXKJag2V2PFeUlznw_WXYgKSwzQfdHQ"/></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-page-bg min-h-screen"><div class="flex flex-col w-full">
+<!-- Owner Welcome & Trust Banner -->
+<section class="px-margin-mobile pt-space-md pb-space-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">أهلاً يا أستاذ محمود</h1>
+<span class="text-headline-lg-mobile select-none animate-bounce">👋</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">متابعة فورية لنشاط وحداتك السكنية وطلبات الطلاب اليوم</p>
+</div>
+<!-- Trust Shield Badge -->
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed/40 flex items-center justify-center text-primary shadow-sm flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+</div>
+<!-- Verified Owner Status Ribbon -->
+<div class="mt-space-xs flex items-center justify-between p-space-xs px-space-sm rounded-xl bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm text-label-sm text-primary font-bold truncate">مالك معتمد وموثق رسمياً لدى وجهة</span>
+</div>
+<span class="font-caption text-caption text-on-surface-variant flex-shrink-0">سجل تجاري ٧٣٩٢</span>
+</div>
+</section>
+<!-- Quick Action: Add New Unit CTA -->
+<section class="px-margin-mobile my-space-xs">
+<button class="w-full h-12 bg-primary-container text-on-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-space-xs shadow-md active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[22px]">add_circle</span>
+<span>+ أضف وحدة جديدة الآن</span>
+</button>
+</section>
+<!-- KPI Cards: Horizontal Carousel Scroll -->
+<section class="mt-space-sm">
+<div class="px-margin-mobile flex items-center justify-between mb-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">الإحصائيات السريعة</h2>
+<span class="font-caption text-caption text-text-muted">مُحدث منذ ٥ دقائق</span>
+</div>
+<div class="flex gap-space-sm overflow-x-auto px-margin-mobile pb-space-sm pt-space-xs snap-x snap-mandatory no-scrollbar">
+<!-- KPI 1: Occupancy -->
+<div class="min-w-[155px] snap-start bg-surface rounded-xl p-space-sm shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">نسبة الإشغال</span>
+<div class="w-8 h-8 rounded-lg bg-tertiary-fixed/30 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">pie_chart</span>
+</div>
+</div>
+<div class="my-space-xs">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">83%</div>
+<div class="w-full bg-surface-container rounded-full h-1.5 mt-1 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 83%"></div>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-status-approved">مرتفعة ومستقرة</span>
+</div>
+<!-- KPI 2: Expected Revenue -->
+<div class="min-w-[165px] snap-start bg-surface rounded-xl p-space-sm shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">إيراد الشهر المتوقع</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+</div>
+<div class="my-space-xs">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">28,500 <span class="font-label-sm text-label-sm text-on-surface">ج.م</span></div>
+<p class="font-caption text-caption text-text-muted truncate">تحصيل خلال ٧ أيام</p>
+</div>
+<span class="font-label-sm text-label-sm text-status-approved font-semibold">+14% عن الشهر السابق</span>
+</div>
+<!-- KPI 3: Total Units & Beds -->
+<div class="min-w-[150px] snap-start bg-surface rounded-xl p-space-sm shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">إجمالي الوحدات</span>
+<div class="w-8 h-8 rounded-lg bg-secondary-fixed/40 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">apartment</span>
+</div>
+</div>
+<div class="my-space-xs">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">4 <span class="font-body-sm text-body-sm text-text-muted">شقق</span></div>
+<span class="font-caption text-caption text-on-surface-variant font-medium">12 سرير معتمد</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">جميعها جاهزة ومفروشة</span>
+</div>
+<!-- KPI 4: Pending Bookings -->
+<div class="min-w-[150px] snap-start bg-surface rounded-xl p-space-sm shadow-sm flex flex-col justify-between relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">طلبات جديدة</span>
+<div class="w-8 h-8 rounded-lg bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">notification_important</span>
+</div>
+</div>
+<div class="my-space-xs">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-secondary font-bold">3 <span class="font-body-sm text-body-sm text-on-surface">طلبات</span></div>
+<span class="font-caption text-caption text-text-muted">بانتظار موافقتك</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">رد سريع مطلوب</span>
+</div>
+</div>
+</section>
+<!-- Wallet & Payout Action Card -->
+<section class="px-margin-mobile my-space-sm">
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-text-muted">الرصيد المتاح للتحويل</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">19,200 <span class="font-body-sm text-body-sm text-primary">ج.م</span></span>
+</div>
+</div>
+<span class="px-space-xs py-1 rounded-full bg-tertiary-fixed/30 text-tertiary font-label-sm text-label-sm font-semibold">جاهز للسحب</span>
+</div>
+<div class="flex gap-space-xs pt-space-xs">
+<button class="flex-1 h-11 bg-primary text-on-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm active:opacity-90">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span>سحب الأرباح الآن</span>
+</button>
+<button aria-label="تفاصيل الحسابات البنكية ومحفظة فودافون كاش" class="w-11 h-11 bg-surface-container-low text-on-surface rounded-xl flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pt-1">
+<span class="w-2 h-2 rounded-full bg-status-approved"></span>
+<span class="font-caption text-caption text-text-muted">متاح التحويل البنكي الفوري عبر إنستاباي، المحافظ الإلكترونية (فودافون كاش)</span>
+</div>
+</div>
+</section>
+<!-- Pending Booking Requests (3 Requests) -->
+<section class="px-margin-mobile my-space-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">طلبات الحجز الواردة</h2>
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">3</span>
+</div>
+<a class="font-label-sm text-label-sm text-primary font-semibold hover:underline" href="#">عرض الكل</a>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Request 1 -->
+<div class="bg-surface rounded-xl p-space-sm shadow-sm flex flex-col gap-space-xs" id="req-card-1">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<img class="w-11 h-11 rounded-full object-cover shadow-sm" data-alt="Portrait photo of a young male Egyptian engineering student wearing casual navy shirt with clean background and pleasant smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJv-z9f1o5xcLoXk9NABA9e1mAD21CIhAmkeru2E9CveYVPwLpShdt5ObUM-DffaPAVpis24qnjVHDZrsViYPMWcJnoE1-NyGODTfTBEEs5MsMO_nXbNWz0T3FDx3Sia7oah_ppWOncEjHi7xYbDo-8Mhg2yQ6R7KZUnK7a42hv0ckJyKbzNys2PnF1JNPsyiynMT80Fezo4TTGn9wq--ivJgxZsgNJlzFZ0fcW4g"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">عمر عبد الرحمن</span>
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="font-caption text-caption text-text-muted truncate">كلية الهندسة • جامعة القاهرة</span>
+</div>
+</div>
+<span class="font-caption text-caption px-2 py-0.5 rounded-md bg-secondary-fixed/40 text-secondary font-medium">سكن شباب</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-xs flex flex-col gap-1 text-on-surface-variant font-caption text-caption">
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bed</span> الغرفة المطلوبة:</span>
+<span class="font-semibold text-on-surface">شقة الحي السابع (غرفة ثنائية)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">calendar_today</span> موعد الانتقال:</span>
+<span class="font-semibold text-on-surface">1 أكتوبر 2024 (فصل دراسي كامل)</span>
+</div>
+</div>
+<div class="flex gap-space-xs pt-space-xs">
+<button class="flex-1 h-10 bg-primary-container text-on-primary rounded-xl font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all" onclick="acceptRequest('req-card-1', 'عمر عبد الرحمن')">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>قبول الحجز</span>
+</button>
+<button class="px-space-sm h-10 bg-surface-container-low text-secondary rounded-xl font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]">account_box</span>
+<span>الملف الشخصي</span>
+</button>
+</div>
+</div>
+<!-- Request 2 -->
+<div class="bg-surface rounded-xl p-space-sm shadow-sm flex flex-col gap-space-xs" id="req-card-2">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<img class="w-11 h-11 rounded-full object-cover shadow-sm" data-alt="Portrait of a respectful young Egyptian female pharmacy student with hijab smiling outdoors at university campus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeu-VFR7WoK2PHm8ussTMBZLmk7Q-xn9aJQWNhEzwuuw_I5FtCtLArZCBAqHpmrbpQzkLHdAbfGQRFXNErqWaERXtu2xyWeN5GQiInKa6j9MoC2PB_MvjkzMxF1My6l0E2GPngnvABP_FpNtzQMiFCrTdOfy62odqHyQZNMptcQyRuPMmzhKAAQoWptRoy9e1kqFJMiyOj6FB-mOZPwdPn0-328psJrzzgLJc5ZAo"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">سارة محمد توفيق</span>
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="font-caption text-caption text-text-muted truncate">كلية الصيدلة • جامعة حلوان</span>
+</div>
+</div>
+<span class="font-caption text-caption px-2 py-0.5 rounded-md bg-tertiary-fixed/30 text-tertiary font-medium">سكن طالبات</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-xs flex flex-col gap-1 text-on-surface-variant font-caption text-caption">
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bed</span> الغرفة المطلوبة:</span>
+<span class="font-semibold text-on-surface">استوديو الدقي (سرير مفرد)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">calendar_today</span> موعد الانتقال:</span>
+<span class="font-semibold text-on-surface">5 أكتوبر 2024 (سنوي)</span>
+</div>
+</div>
+<div class="flex gap-space-xs pt-space-xs">
+<button class="flex-1 h-10 bg-primary-container text-on-primary rounded-xl font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all" onclick="acceptRequest('req-card-2', 'سارة محمد توفيق')">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>قبول الحجز</span>
+</button>
+<button class="px-space-sm h-10 bg-surface-container-low text-secondary rounded-xl font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]">account_box</span>
+<span>الملف الشخصي</span>
+</button>
+</div>
+</div>
+<!-- Request 3 -->
+<div class="bg-surface rounded-xl p-space-sm shadow-sm flex flex-col gap-space-xs" id="req-card-3">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs">
+<img class="w-11 h-11 rounded-full object-cover shadow-sm" data-alt="Portrait of a young male medical student with glasses holding textbooks in natural soft library lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk6_UwrpIiWmUIB3gD4pB4BBOAg8jrvSapKsTVqR_sp9q2avu--H9QDFxJeM2b8sd5hcnwjinipOXGczw0pa_e1l9Z9pqgxSyQ2egyomVeOaVkzGGk_xwAiFxHQu_kf6djehPm3Y-LXvcamJ7soDiomzyZzL3GO_x2fLC4rbk0uvKW1acuelBLU1clGeXcN-tsSzefGKty11CHboDLdc6un9YcREAJ0FbKQ2oO9VY"/>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">كريم يحيى المصري</span>
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="font-caption text-caption text-text-muted truncate">كلية الطب البشري • القصر العيني</span>
+</div>
+</div>
+<span class="font-caption text-caption px-2 py-0.5 rounded-md bg-secondary-fixed/40 text-secondary font-medium">سكن شباب</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-xs flex flex-col gap-1 text-on-surface-variant font-caption text-caption">
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">bed</span> الغرفة المطلوبة:</span>
+<span class="font-semibold text-on-surface">شقة المنيل الطبية (سرير مشترك)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">calendar_today</span> موعد الانتقال:</span>
+<span class="font-semibold text-on-surface">15 أكتوبر 2024</span>
+</div>
+</div>
+<div class="flex gap-space-xs pt-space-xs">
+<button class="flex-1 h-10 bg-primary-container text-on-primary rounded-xl font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all" onclick="acceptRequest('req-card-3', 'كريم يحيى المصري')">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>قبول الحجز</span>
+</button>
+<button class="px-space-sm h-10 bg-surface-container-low text-secondary rounded-xl font-label-sm text-label-sm font-semibold flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[18px]">account_box</span>
+<span>الملف الشخصي</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- My Properties Section (Vertical Cards) -->
+<section class="px-margin-mobile my-space-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">وحداتي السكنية</h2>
+<span class="font-caption text-caption text-text-muted">(4 شقق)</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-low rounded-lg p-1">
+<button class="px-2 py-0.5 rounded font-label-sm text-label-sm bg-surface text-primary shadow-sm">الكل</button>
+<button class="px-2 py-0.5 rounded font-label-sm text-label-sm text-on-surface-variant">النشطة</button>
+</div>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Unit 1 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative h-44 w-full">
+<img class="w-full h-full object-cover" data-alt="Modern spacious student shared apartment living room with modern clean couches study desks warm sunlight filtering through balcony and neat kitchen bar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa9tW3iviuYrr9NfqS7nvaE2E5XNaGP-ZYvg2a9oz-2CIk3y_WFjui_lYXmQhfk09XgR39soFpm1IVv92SsWB1d-qsgzoVmeTFE1ne5JXTCqi2zck7Q60b0NNe8CYqzDx2mj-oeQXkXuFOig93qDrockjemXdmGODjJxRbYISAWaCzGsf0VeD5BvW0ftO4tCobe-J224MNxBRt1uuBIoM1T9F9jZhEpX8Xfc8YMH4"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-status-approved text-on-primary font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+<span>نشطة ومتاحة</span>
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-on-surface/75 backdrop-blur-md text-surface font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">hotel</span>
+<span>سرير واحد متبقي فقط</span>
+</div>
+<div class="absolute top-3 left-3 w-8 h-8 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface shadow-sm">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">شقة الحي السابع - أمام جامعة القاهرة</h3>
+<p class="font-caption text-caption text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-primary">location_on</span>
+                الجيزة • ٥ دقائق مشياً لبوابة تجارة
+              </p>
+</div>
+<div class="text-left">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">2,400</span>
+<span class="font-caption text-caption text-text-muted block">ج.م / سرير / شهر</span>
+</div>
+</div>
+<!-- Unit Specs Grid -->
+<div class="grid grid-cols-3 gap-2 py-space-xs my-1 bg-surface-container-low/60 rounded-xl px-space-xs text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">الأسرة</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">3 / 4 مشغول</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">النوع</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">طلاب شباب</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">التقييم</span>
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+                4.9 <span class="material-symbols-outlined text-[14px] text-status-pending" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+</div>
+</div>
+<!-- Controls Bar & Switch -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" onchange="toggleUnitStatus(this, 'status-label-1')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="font-label-sm text-label-sm text-primary font-medium" id="status-label-1">استقبال الحجوزات مفعل</span>
+</div>
+<button class="px-space-sm h-9 bg-surface-container-low text-primary rounded-xl font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>تعديل التفاصيل</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Unit 2 -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="relative h-44 w-full">
+<img class="w-full h-full object-cover" data-alt="Cozy sunlit studio apartment in Dokki Cairo with single comfortable bed study corner kitchenette clean modern wooden furniture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpky9yl8aC3AoqI3Dj2MlFA3jlToYj4WaHgF-abhV9Mb5AzlAuGlrFLSaoAFeiHCnbc1MO_jeV8qlKyKCG7tnHt7-beVPO14XqKT5yOU-iM3Y1KP1KhXRAYmNtOVSQ-QlgGZlepZmrOL72t9NNblROeUa47nHvoEM5tynE_JpmPDrict_JKpmE1kdLH-HNZCyzh5VduOXWeBMnM7tiCro-quLA5vqoign8cDJceNw"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-status-approved text-on-primary font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+<span>نشطة ومتاحة</span>
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-on-surface/75 backdrop-blur-md text-surface font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">hotel</span>
+<span>سريران متبقيان</span>
+</div>
+<div class="absolute top-3 left-3 w-8 h-8 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface shadow-sm">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">استوديو الدقي الأكاديمي</h3>
+<p class="font-caption text-caption text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-primary">location_on</span>
+                الدقي • بجوار محطة المترو والبحوث
+              </p>
+</div>
+<div class="text-left">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">3,200</span>
+<span class="font-caption text-caption text-text-muted block">ج.م / سرير / شهر</span>
+</div>
+</div>
+<!-- Unit Specs Grid -->
+<div class="grid grid-cols-3 gap-2 py-space-xs my-1 bg-surface-container-low/60 rounded-xl px-space-xs text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">الأسرة</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">1 / 3 مشغول</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">النوع</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">سكن طالبات</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">التقييم</span>
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+                4.8 <span class="material-symbols-outlined text-[14px] text-status-pending" style="font-variation-settings: 'FILL' 1;">star</span>
+</span>
+</div>
+</div>
+<!-- Controls Bar & Switch -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" onchange="toggleUnitStatus(this, 'status-label-2')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="font-label-sm text-label-sm text-primary font-medium" id="status-label-2">استقبال الحجوزات مفعل</span>
+</div>
+<button class="px-space-sm h-9 bg-surface-container-low text-primary rounded-xl font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+<span>تعديل التفاصيل</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Unit 3: Fully Booked -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm flex flex-col opacity-95">
+<div class="relative h-44 w-full">
+<img class="w-full h-full object-cover" data-alt="Warm welcoming bedroom in student flat in El-Manial Cairo with two tidy single beds wooden wardrobes air conditioner and study desks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMFxF01kqmH2aX__V4_ExnpWp_mbRHj1ZH3aTF1BUYyOQ7SB6nVxvkWGzj1ynkMrO5eAG9n4YP-7y7Yy9M_UW8lXyK2N0YFeRN_4WYS7cQTSNQD97jfMO3Yx8SUJVqj-WutZUFLjrUts3n8V5OCB0pc0c4VXg30U8LgkMPIKIbKrRYpra4zzonTjtQ7iiGQda1E2repz_-7blxRFSDNT0cWxxL_hHixPLTVV7F9xQ"/>
+<div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-on-surface/80 text-surface font-label-sm text-label-sm flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>مؤجرة بالكامل</span>
+</div>
+<div class="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-secondary text-on-secondary font-caption text-caption flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span>الأسرة مكتملة (٥/٥)</span>
+</div>
+<div class="absolute top-3 left-3 w-8 h-8 rounded-full bg-surface/90 backdrop-blur-md flex items-center justify-center text-on-surface shadow-sm">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</div>
+</div>
+<div class="p-space-sm flex flex-col gap-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">شقة المنيل الطبية</h3>
+<p class="font-caption text-caption text-text-muted flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px] text-primary">location_on</span>
+                المنيل • خطوتين من مستشفيات القصر العيني
+              </p>
+</div>
+<div class="text-left">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">2,600</span>
+<span class="font-caption text-caption text-text-muted block">ج.م / سرير / شهر</span>
+</div>
+</div>
+<!-- Unit Specs Grid -->
+<div class="grid grid-cols-3 gap-2 py-space-xs my-1 bg-surface-container-low/60 rounded-xl px-space-xs text-center">
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">الأسرة</span>
+<span class="font-label-md text-label-md text-status-approved font-bold">5 / 5 ممتلئة</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">النوع</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">طلاب طب</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-caption text-caption text-text-muted">عقود سارية</span>
+<span class="font-label-md text-label-md text-primary font-bold">حتى يوليو ٢٠٢٥</span>
+</div>
+</div>
+<!-- Controls Bar & Switch -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-2">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" onchange="toggleUnitStatus(this, 'status-label-3')" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+<span class="font-label-sm text-label-sm text-text-muted font-medium" id="status-label-3">الحجز معطل مؤقتاً</span>
+</div>
+<button class="px-space-sm h-9 bg-surface-container-low text-on-surface rounded-xl font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>عقود المستأجرين</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Support & Owner Guidance Prompt -->
+<section class="px-margin-mobile my-space-sm mb-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-xs">
+<div class="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">support_agent</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">مدير حسابك في وجهة</span>
+<span class="font-caption text-caption text-text-muted">مساعدك الشخصي للتوثيق والتحصيل: أ. زياد</span>
+</div>
+</div>
+<button class="h-9 px-space-sm bg-primary text-on-primary rounded-xl font-label-sm text-label-sm font-semibold flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span>محادثة</span>
+</button>
+</div>
+</section>
+<!-- Toast Notification Container -->
+<div class="fixed bottom-24 inset-x-margin-mobile z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none" id="toast">
+<div class="bg-primary text-on-primary p-space-sm rounded-xl shadow-xl flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-tertiary-fixed">task_alt</span>
+<span class="font-label-md text-label-md font-medium" id="toast-msg">تم قبول الطلب وتأكيد الحجز بنجاح!</span>
+</div>
+<span class="material-symbols-outlined text-[18px] opacity-75">close</span>
+</div>
+</div>
+</div>
+<script>
+  function acceptRequest(cardId, studentName) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    
+    // Smooth fade out card
+    card.style.transition = 'all 0.3s ease';
+    card.style.opacity = '0';
+    card.style.transform = 'scale(0.95)';
+    
+    setTimeout(() => {
+      card.innerHTML = `
+        <div class="p-space-xs bg-tertiary-fixed/30 rounded-xl flex items-center justify-between">
+          <div class="flex items-center gap-2 text-primary font-label-sm text-label-sm">
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            <span>تم قبول حجز ${studentName} وإرسال إشعار الدفع إليه</span>
+          </div>
+          <button onclick="this.parentElement.parentElement.remove()" class="text-primary font-caption text-caption underline">إخفاء</button>
+        </div>
+      `;
+      card.style.opacity = '1';
+      card.style.transform = 'scale(1)';
+      
+      // Trigger toast
+      showToast(`تم قبول حجز الطالب ${studentName} بنجاح! 🎉`);
+    }, 300);
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-msg');
+    if (!toast || !toastMsg) return;
+
+    toastMsg.textContent = message;
+    toast.classList.remove('translate-y-32', 'opacity-0');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-32', 'opacity-0');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3500);
+  }
+
+  function toggleUnitStatus(checkbox, labelId) {
+    const label = document.getElementById(labelId);
+    if (!label) return;
+    if (checkbox.checked) {
+      label.textContent = 'استقبال الحجوزات مفعل';
+      label.className = 'font-label-sm text-label-sm text-primary font-medium';
+      showToast('تم تفعيل استقبال الحجوزات للوحدة بنجاح');
+    } else {
+      label.textContent = 'الحجز معطل مؤقتاً';
+      label.className = 'font-label-sm text-label-sm text-text-muted font-medium';
+      showToast('تم تعطيل استقبال الحجوزات مؤقتاً لهذه الوحدة');
+    }
+  }
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(31,41,55,0.06)]" data-active-classes="text-primary font-label-md"><div class="flex justify-between items-center h-20 px-space-xs"><a class="flex-1 flex flex-col items-center justify-center gap-1 h-16 text-on-surface-variant hover:text-primary transition-all" data-path="home" href="#"><span class="material-symbols-outlined text-[24px]">home</span><span class="text-label-sm font-label-sm">الرئيسية</span></a><a class="flex-1 flex flex-col items-center justify-center gap-1 h-16 text-on-surface-variant hover:text-primary transition-all" data-path="explore" href="#"><span class="material-symbols-outlined text-[24px]">travel_explore</span><span class="text-label-sm font-label-sm">استكشاف</span></a><a class="flex-1 flex flex-col items-center justify-center gap-1 h-16 text-on-surface-variant hover:text-primary transition-all" data-path="recommendations" href="#"><span class="material-symbols-outlined text-[24px]">auto_awesome</span><span class="text-label-sm font-label-sm">ترشيحاتي</span></a><a class="flex-1 flex flex-col items-center justify-center gap-1 h-16 text-on-surface-variant hover:text-primary transition-all" data-path="owner-dashboard" href="#"><span class="material-symbols-outlined text-[24px]">real_estate_agent</span><span class="text-label-sm font-label-sm">لوحة المالك</span></a><a class="flex-1 flex flex-col items-center justify-center gap-1 h-16 text-on-surface-variant hover:text-primary transition-all" data-path="profile" href="#"><span class="material-symbols-outlined text-[24px]">person</span><span class="text-label-sm font-label-sm">الملف الشخصي</span></a></div></nav>
+</body></html>

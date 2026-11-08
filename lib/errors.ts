@@ -1,0 +1,21 @@
+/**
+ * Stable error codes returned by server actions. The UI maps these codes to
+ * localized messages, so failures never depend on parsing error text.
+ */
+export const ERROR_CODES = {
+  UNAUTHENTICATED: "UNAUTHENTICATED",
+  FORBIDDEN: "FORBIDDEN",
+  INVALID_INPUT: "INVALID_INPUT",
+  NOT_FOUND: "NOT_FOUND",
+  CONFLICT: "CONFLICT",
+  INVALID_STATE: "INVALID_STATE",
+  BED_UNAVAILABLE: "BED_UNAVAILABLE",
+  UNIT_NOT_APPROVED: "UNIT_NOT_APPROVED",
+  PROFILE_INCOMPLETE: "PROFILE_INCOMPLETE",
+  ACTIVE_BOOKINGS: "ACTIVE_BOOKINGS",
+  HAS_UPCOMING_VISITS: "HAS_UPCOMING_VISITS",
+  RESTORE_CONFLICT: "RESTORE_CONFLICT",
+  UNEXPECTED: "UNEXPECTED",
+} as const;
+
+export type ErrorCode = keyof typeof ERROR_CODES;

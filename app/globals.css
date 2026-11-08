@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+/* Class-based dark mode. The theme is set before paint by an inline script in app/layout.tsx. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-canvas: #f4fbf9;
+  --color-surface: #ffffff;
+  --color-ink: #1f2937;
+  --color-mint: #7fd8c0;
+  --color-teal: #0f766e;
+  --color-teal-dark: #0b5752;
+  --color-brown: #833a22;
+  --color-brown-ink: #833a22;
+
+  /* Primary actions keep a readable foreground in both themes. */
+  --color-primary: #0f766e;
+  --color-primary-foreground: #ffffff;
+  --color-primary-hover: #0b5752;
+  --color-strong: #1f2937;
+
+  /* Status colors from the design system, plus readable text tints on light chips. */
+  --color-approved: #2e9e6b;
+  --color-approved-soft: #e7f6ef;
+  --color-approved-ink: #1c6b49;
+  --color-pending: #e0a100;
+  --color-pending-soft: #fdf3dc;
+  --color-pending-ink: #7a5800;
+  --color-rejected: #c0392b;
+  --color-rejected-soft: #fbeae8;
+  --color-rejected-ink: #a02e22;
+
+  --color-slate: #6b7280;
+  --color-line: #d6e4e0;
+
+  --radius-panel: 1.5rem;
+  --shadow-card: 0 1px 2px rgb(31 41 55 / 0.04), 0 12px 28px -18px rgb(31 41 55 / 0.25);
+  --shadow-panel: 0 2px 4px rgb(31 41 55 / 0.04), 0 24px 48px -28px rgb(31 41 55 / 0.3);
+}
+
+@theme inline {
+  --font-display: var(--font-cairo);
+  --font-body: var(--font-cairo);
+}
+
+/*
+ * Dark theme: override the same tokens, so every existing utility
+ * (bg-canvas, text-ink, border-line, ...) adapts without per-page dark: classes.
+ */
+html.dark {
+  color-scheme: dark;
+
+  --color-canvas: #07110f;
+  --color-surface: #0e201c;
+  --color-ink: #e6f4f0;
+  --color-mint: #7fd8c0;
+  --color-teal: #5eead4;
+  --color-teal-dark: #99f6e4;
+  --color-brown: #a85433;
+  --color-brown-ink: #f2b39c;
+
+  --color-primary: #2dd4bf;
+  --color-primary-foreground: #042f2a;
+  --color-primary-hover: #5eead4;
+  --color-strong: #102a25;
+
+  --color-approved-soft: #0f2e22;
+  --color-approved-ink: #7ee2b8;
+  --color-pending-soft: #33280a;
+  --color-pending-ink: #f7cf6b;
+  --color-rejected-soft: #3a1a17;
+  --color-rejected-ink: #f7a8a0;
+
+  --color-slate: #9db3ae;
+  --color-line: #24403a;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 28px -18px rgb(0 0 0 / 0.6);
+  --shadow-panel: 0 2px 4px rgb(0 0 0 / 0.3), 0 24px 48px -28px rgb(0 0 0 / 0.65);
+}
+
+html {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.7;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+::selection {
+  background: var(--color-mint);
+  color: #1f2937;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brown-ink);
+  outline-offset: 4px;
+}
+
+.blueprint {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.route-path {
+  stroke-dasharray: 8 12;
+  animation: route-move 12s linear infinite;
+}
+
+@keyframes route-move {
+  to {
+    stroke-dashoffset: -240;
+  }
+}
+
+/*
+ * Theme switch: a circular reveal from the toggle.
+ * Going dark: the new (dark) view grows from the button.
+ * Going light: the old (dark) view shrinks back into the button.
+ */
+::view-transition-group(root) {
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+html.theme-to-dark::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-reveal-in 620ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.theme-to-light::view-transition-old(root) {
+  z-index: 2;
+  animation: theme-reveal-out 620ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes theme-reveal-in {
+  from {
+    clip-path: circle(0 at var(--theme-x) var(--theme-y));
+  }
+  to {
+    clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y));
+  }
+}
+
+@keyframes theme-reveal-out {
+  from {
+    clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y));
+  }
+  to {
+    clip-path: circle(0 at var(--theme-x) var(--theme-y));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation: none !important;
+  }
+}
