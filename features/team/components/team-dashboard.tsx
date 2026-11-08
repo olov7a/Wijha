@@ -53,7 +53,7 @@ function EvaluationDialog({ visit, onClose }: { visit: VisitView; onClose: () =>
     try {
       const supabase = createClient();
       const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-      const path = `${visit.unitId}/inspection-${Date.now()}.${ext}`;
+      const path = `${visit.unitId}/inspection-${crypto.randomUUID()}.${ext}`;
       const { error: uploadError } = await supabase.storage.from("unit-photos").upload(path, file, { contentType: file.type, upsert: true });
       if (uploadError) { setError(actionErrorMessage(locale, "UNEXPECTED")); return; }
       setPhotoPaths((current) => [...current, path].slice(0, 10));

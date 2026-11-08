@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { guardAction, failureResult } from "@/lib/action-pipeline";
+import { guardAction, failureResult, isRateLimited } from "@/lib/action-pipeline";
 import { ERROR_CODES } from "@/lib/errors";
 import type { Result } from "@/lib/result";
 import { cancelBookingSchema, createBookingSchema } from "@/features/booking/schemas";
@@ -24,6 +24,11 @@ export async function createBooking(input: unknown): Promise<Result<{ bookingId:
 
   const guard = await guardAction({ roles: ["student"] });
   if (!guard.ok) return guard;
+
+  // 5 successful bookings per hour per student (stops bed-flooding) — backed
+  // by the booking.created audit entries the RPC already writes.
+  const limited = await isRateLimited(guard.supabase, guard.user.id, "booking.created", 5, 60);
+  if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
 
   const { data, error } = await guard.supabase.rpc("create_booking", {
     p_unit_id: parsed.data.unitId,

@@ -64,3 +64,26 @@ export async function guardAction(options: { roles?: readonly UserRole[] } = {})
 
   return { ok: true, user, supabase: await createClient() };
 }
+
+/**
+ * SQL-backed attempt limiter for abuse-prone actions (bootstrap, payments,
+ * booking). Reads the append-only audit trail so no in-memory state can be
+ * reset by a redeploy. Call `denyLog` on each rejection so the counter moves.
+ */
+export async function isRateLimited(
+  supabase: SupabaseServerClient,
+  actorId: string,
+  action: string,
+  maxAttempts: number,
+  windowMinutes: number,
+): Promise<boolean> {
+  const since = new Date(Date.now() - windowMinutes * 60 * 1000).toISOString();
+  const { count, error } = await supabase
+    .from("audit_logs")
+    .select("id", { count: "exact", head: true })
+    .eq("actor_id", actorId)
+    .eq("action", action)
+    .gte("created_at", since);
+  if (error) return false;
+  return (count ?? 0) >= maxAttempts;
+}

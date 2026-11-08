@@ -1,10 +1,10 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { guardAction, failureResult } from "@/lib/action-pipeline";
+import { guardAction, failureResult, isRateLimited } from "@/lib/action-pipeline";
 import { ERROR_CODES } from "@/lib/errors";
 import type { Result } from "@/lib/result";
-import { confirmPaymentSchema, failPaymentSchema } from "@/features/payments/schemas";
+import { confirmPaymentSchema, failPaymentSchema, refundPaymentSchema } from "@/features/payments/schemas";
 
 const AFFECTED_PATHS = ["/student", "/owner", "/admin"] as const;
 
@@ -23,6 +23,10 @@ export async function confirmPayment(input: unknown): Promise<Result<null>> {
 
   const guard = await guardAction({ roles: ["admin"] });
   if (!guard.ok) return guard;
+
+  // 20 payment confirmations per hour per admin (stops reconciliation spam).
+  const limited = await isRateLimited(guard.supabase, guard.user.id, "payment.confirmed", 20, 60);
+  if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
 
   const { error } = await guard.supabase.rpc("confirm_booking_payment", {
     p_booking_id: parsed.data.bookingId,
@@ -46,6 +50,24 @@ export async function failPayment(input: unknown): Promise<Result<null>> {
   const { error } = await guard.supabase.rpc("fail_booking_payment", {
     p_booking_id: parsed.data.bookingId,
     p_failure_reason: parsed.data.reason,
+  });
+
+  if (error) return failureResult(error);
+
+  revalidateAffected();
+  return { ok: true, data: null };
+}
+
+/** Refund a captured payment. Admin-only; writes payment.refunded to audit. */
+export async function refundPayment(input: unknown): Promise<Result<null>> {
+  const parsed = refundPaymentSchema.safeParse(input);
+  if (!parsed.success) return { ok: false, error: ERROR_CODES.INVALID_INPUT };
+
+  const guard = await guardAction({ roles: ["admin"] });
+  if (!guard.ok) return guard;
+
+  const { error } = await guard.supabase.rpc("refund_booking_payment", {
+    p_booking_id: parsed.data.bookingId,
   });
 
   if (error) return failureResult(error);

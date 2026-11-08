@@ -406,6 +406,7 @@ export type Database = {
           status: Database["public"]["Enums"]["payment_status"];
           failure_reason: string | null;
           paid_at: Timestamp | null;
+          expires_at: Timestamp | null;
           created_at: Timestamp;
           updated_at: Timestamp;
           deleted_at: Timestamp | null;
@@ -421,6 +422,7 @@ export type Database = {
           status?: Database["public"]["Enums"]["payment_status"];
           failure_reason?: string | null;
           paid_at?: Timestamp | null;
+          expires_at?: Timestamp | null;
           created_at?: Timestamp;
           updated_at?: Timestamp;
           deleted_at?: Timestamp | null;
@@ -436,6 +438,7 @@ export type Database = {
           status?: Database["public"]["Enums"]["payment_status"];
           failure_reason?: string | null;
           paid_at?: Timestamp | null;
+          expires_at?: Timestamp | null;
           created_at?: Timestamp;
           updated_at?: Timestamp;
           deleted_at?: Timestamp | null;
@@ -514,6 +517,37 @@ export type Database = {
           created_at?: Timestamp;
           updated_at?: Timestamp;
           deleted_at?: Timestamp | null;
+        };
+        Relationships: [];
+      };
+      payment_events: {
+        Row: {
+          id: number;
+          booking_id: string;
+          payment_id: string | null;
+          from_status: Database["public"]["Enums"]["payment_status"] | null;
+          to_status: Database["public"]["Enums"]["payment_status"];
+          amount_piastres: number;
+          currency: string;
+          created_at: Timestamp;
+        };
+        Insert: {
+          booking_id: string;
+          payment_id?: string | null;
+          from_status?: Database["public"]["Enums"]["payment_status"] | null;
+          to_status: Database["public"]["Enums"]["payment_status"];
+          amount_piastres: number;
+          currency?: string;
+          created_at?: Timestamp;
+        };
+        Update: {
+          booking_id?: string;
+          payment_id?: string | null;
+          from_status?: Database["public"]["Enums"]["payment_status"] | null;
+          to_status?: Database["public"]["Enums"]["payment_status"];
+          amount_piastres?: number;
+          currency?: string;
+          created_at?: Timestamp;
         };
         Relationships: [];
       };
@@ -678,6 +712,7 @@ export type Database = {
         Returns: undefined;
       };
       claim_first_admin: { Args: { p_actor: string }; Returns: undefined };
+      refund_booking_payment: { Args: { p_booking_id: string }; Returns: undefined };
       admin_find_users: {
         Args: { p_query: string };
         Returns: {
@@ -695,7 +730,7 @@ export type Database = {
       unit_status: "pending" | "approved" | "rejected";
       bed_status: "available" | "held" | "booked";
       booking_status: "pending_payment" | "confirmed" | "cancelled" | "completed";
-      payment_status: "pending" | "paid" | "failed" | "refunded";
+      payment_status: "pending" | "paid" | "failed" | "refunded" | "expired";
       review_target_type: "unit" | "student";
       moderation_status: "pending" | "approved" | "rejected";
       contract_status: "not_requested" | "requested" | "signed";

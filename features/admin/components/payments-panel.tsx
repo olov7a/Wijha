@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition, type ChangeEvent } from "react";
-import { failPayment, confirmPayment } from "@/app/actions/payments";
+import { confirmPayment, failPayment, refundPayment } from "@/app/actions/payments";
 import { signContract } from "@/app/actions/contracts";
 import { getContractDownloadUrl } from "@/app/actions/profile";
 import { useI18n } from "@/components/providers/locale-provider";
@@ -55,6 +55,8 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
           download: "تحميل العقد",
           donePaid: "تم تأكيد الدفع.",
           doneFail: "تم تسجيل فشل الدفع وإلغاء الحجز.",
+          doneRefund: "تم تنفيذ الاسترداد.",
+          refund: "استرداد (أدمن)",
           doneSign: "تم توقيع العقد وإرفاقه.",
           empty: "لا توجد حجوزات مرتبطة للمطابقة بعد.",
           statusMap: { pending_payment: "بانتظار الدفع", confirmed: "مؤكد", cancelled: "ملغي", completed: "مكتمل" },
@@ -83,6 +85,8 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
           download: "Download contract",
           donePaid: "Payment confirmed.",
           doneFail: "Payment failure recorded and booking cancelled.",
+          doneRefund: "Refund executed.",
+          refund: "Refund (admin)",
           doneSign: "Contract signed and attached.",
           empty: "No bookings to reconcile yet.",
           statusMap: { pending_payment: "Pending payment", confirmed: "Confirmed", cancelled: "Cancelled", completed: "Completed" },
@@ -118,6 +122,15 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
       const result = await failPayment({ bookingId: b.id, reason });
       if (!result.ok) { setError(actionErrorMessage(locale, result.error)); return; }
       setNotice(labels.doneFail); router.refresh();
+    });
+  }
+
+  async function refundPaid(b: AdminBookingView) {
+    if (!window.confirm(locale === "ar" ? "تنفيذ استرداد مبلغ مدفوع؟" : "Execute a refund of a paid amount?")) return;
+    run(b.id, async () => {
+      const result = await refundPayment({ bookingId: b.id });
+      if (!result.ok) { setError(actionErrorMessage(locale, result.error)); return; }
+      setNotice(labels.doneRefund); router.refresh();
     });
   }
 
@@ -210,6 +223,11 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
                       </div>
                     ) : (
                       <p className="mt-2 text-xs text-slate">{labels.needPayment}</p>
+                    )}
+                    {b.paymentStatus === "paid" && (
+                      <Button type="button" size="sm" variant="secondary" onClick={() => refundPaid(b)} disabled={busy} className="mt-3">
+                        {labels.refund}
+                      </Button>
                     )}
                   </div>
 

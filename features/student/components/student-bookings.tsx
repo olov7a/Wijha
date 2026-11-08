@@ -85,6 +85,7 @@ export function StudentBookings({ bookings, name }: { bookings: StudentBookingVi
             paid: "مدفوع",
             failed: "فشل",
             refunded: "مسترد",
+            expired: "منتهية",
           },
           contractStatus: {
             not_requested: "لم يُطلب",
@@ -132,6 +133,7 @@ export function StudentBookings({ bookings, name }: { bookings: StudentBookingVi
             paid: "Paid",
             failed: "Failed",
             refunded: "Refunded",
+            expired: "Expired",
           },
           contractStatus: {
             not_requested: "Not requested",

@@ -222,7 +222,7 @@ export function ProfileView({ profile }: { profile: MyProfile }) {
     try {
       const supabase = createClient();
       const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-      const path = `${profile.userId}/${key}-${Date.now()}.${ext}`;
+      const path = `${profile.userId}/${key}-${crypto.randomUUID()}.${ext}`;
       const bucket = key === "ownerId" || key === "ownership" ? "ownership-documents" : "id-documents";
       const { error: upErr } = await supabase.storage.from(bucket).upload(path, file, { contentType: file.type, upsert: true });
       if (upErr) { setError(labels.errorUpload); return; }

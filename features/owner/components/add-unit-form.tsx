@@ -231,7 +231,8 @@ export function AddUnitForm() {
       const supabase = createClient();
       for (const [index, file] of photos.entries()) {
         const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "-").toLowerCase();
-        const path = `${unitId}/${Date.now()}-${index}-${safeName}`;
+        const path = `${unitId}/${crypto.randomUUID()}-${safeName}`;
+        void index;
         const { error: uploadError } = await supabase.storage
           .from("unit-photos")
           .upload(path, file, { contentType: file.type || "image/jpeg", upsert: false });

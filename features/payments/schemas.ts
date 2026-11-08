@@ -17,3 +17,9 @@ export const failPaymentSchema = z
   .strict();
 
 export type FailPaymentInput = z.infer<typeof failPaymentSchema>;
+
+export const refundPaymentSchema = z
+  .object({ bookingId: z.uuid() })
+  .strict();
+
+export type RefundPaymentInput = z.infer<typeof refundPaymentSchema>;
