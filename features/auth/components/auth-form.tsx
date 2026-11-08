@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { signIn, signUp } from "@/app/actions/auth";
 import { useI18n } from "@/components/providers/locale-provider";
@@ -30,11 +30,47 @@ export function AuthForm({
   configured: boolean;
 }) {
   const [state, formAction] = useActionState<AuthState, FormData>(mode === "login" ? signIn : signUp, {});
-  const { t } = useI18n();
+  const { t, locale: localeConfirm } = useI18n();
   const [role, setRole] = useState<"student" | "owner">(defaultRole);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Show every field error under its input and keep valid fields intact.
+  useEffect(() => {
+    if (!state.fieldErrors) return;
+    const form = formRef.current;
+    if (!form) return;
+    for (const [name, message] of Object.entries(state.fieldErrors)) {
+      // Clear ONLY the wrong field so the user can retype it.
+      const fields = form.querySelectorAll<HTMLInputElement | HTMLSelectElement>(`[name="${name}"]`);
+      fields.forEach((el) => {
+        if (el.type !== "radio" && el.type !== "checkbox") el.value = "";
+      });
+      const target = document.getElementById(`error-${name}`) as HTMLElement | null;
+      if (target) target.textContent = message;
+    }
+    const first = Object.keys(state.fieldErrors)[0];
+    if (first) {
+      const el = document.getElementById(`field-${first}`) as HTMLElement | null;
+      el?.focus({ preventScroll: false });
+    }
+  }, [state]);
+
+  // Login: when Supabase rejects credentials we must not reveal which
+  // one is wrong, and we clear only the password field (keep the email).
+  useEffect(() => {
+    if (mode !== "login") return;
+    if (state.error) {
+      const form = formRef.current;
+      if (!form) return;
+      const pw = form.querySelector<HTMLInputElement>('input[name="password"]');
+      if (pw) pw.value = "";
+      const first = document.getElementById("field-password") as HTMLElement | null;
+      first?.focus({ preventScroll: false });
+    }
+  }, [state, mode]);
 
   return (
-    <form action={formAction} className="mt-8 space-y-5">
+    <form ref={formRef} action={formAction} className="mt-8 space-y-5" noValidate>
       <fieldset disabled={!configured} className="space-y-5">
         {mode === "signup" && (
           <>
@@ -78,6 +114,7 @@ export function AuthForm({
               minLength={2}
               maxLength={100}
               placeholder={t.auth.form.fullNamePlaceholder}
+              error={state.fieldErrors?.fullName}
             />
             <Input
               name="phone"
@@ -86,10 +123,12 @@ export function AuthForm({
               inputMode="tel"
               autoComplete="tel"
               required
-              maxLength={16}
+              maxLength={20}
               dir="ltr"
               className="text-left"
               placeholder={t.auth.form.phonePlaceholder}
+              hint={t.auth.errors.phoneHint}
+              error={state.fieldErrors?.phone}
             />
             {role === "student" && (
               <div className="space-y-5 rounded-2xl border border-line bg-canvas/60 p-4">
@@ -165,6 +204,7 @@ export function AuthForm({
           dir="ltr"
           className="text-left"
           placeholder="name@example.com"
+          error={state.fieldErrors?.email}
         />
         <Input
           name="password"
@@ -178,7 +218,23 @@ export function AuthForm({
           className="text-left"
           placeholder={t.auth.form.passwordPlaceholder}
           hint={mode === "signup" ? t.auth.form.passwordHint : undefined}
+          error={state.fieldErrors?.password}
         />
+        {mode === "signup" && (
+          <Input
+            name="confirmPassword"
+            type="password"
+            label={localeConfirm === "ar" ? "تأكيد كلمة السر" : "Confirm password"}
+            autoComplete="new-password"
+            required
+            minLength={8}
+            maxLength={72}
+            dir="ltr"
+            className="text-left"
+            placeholder={t.auth.form.passwordPlaceholder}
+            error={state.fieldErrors?.confirmPassword}
+          />
+        )}
       </fieldset>
 
       {!configured && (

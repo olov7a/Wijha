@@ -1,10 +1,16 @@
 import type { NextConfig } from "next";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "https://*.supabase.co";
+const isDev = process.env.NODE_ENV !== "production";
+
+// Next/React needs 'unsafe-eval' in development for debugging. Never add it to production.
+const scriptSrc = isDev
+  ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+  : "script-src 'self' 'unsafe-inline'";
 
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  scriptSrc,
   "style-src 'self' 'unsafe-inline'",
   `img-src 'self' data: blob: ${supabaseUrl} https://*.supabase.co`,
   `connect-src 'self' ${supabaseUrl} wss://*.supabase.co`,

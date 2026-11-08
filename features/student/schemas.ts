@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { parsePhone } from "@/lib/validation/phone";
 
 const AMENITY_KEYS = [
   "wifi",
@@ -10,12 +11,10 @@ const AMENITY_KEYS = [
   "security",
 ] as const;
 
-const PHONE_PATTERN = /^\+?[1-9][0-9]{7,14}$/;
-
 export const updateStudentProfileSchema = z
   .object({
     fullName: z.string().trim().min(2).max(100),
-    phone: z.string().trim().regex(PHONE_PATTERN),
+    phone: z.string().trim().refine((value) => parsePhone(value).ok, { message: "phone" }),
     gender: z.enum(["male", "female"]),
     university: z.string().trim().max(160).optional(),
     studyYear: z.number().int().min(1).max(12).nullable().optional(),

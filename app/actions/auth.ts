@@ -5,9 +5,19 @@ import { redirect } from "next/navigation";
 import { getDictionary } from "@/lib/i18n/dictionary";
 import { getLocale } from "@/lib/i18n/server";
 import { env, isSupabaseConfigured } from "@/lib/env";
+import { toE164 } from "@/lib/validation/phone";
 import { createClient } from "@/lib/supabase/server";
 import { createLoginSchema, createSignupSchema } from "@/features/auth/schemas";
 import type { AuthState } from "@/features/auth/types";
+
+function fieldErrorsFromIssues(issues: { path: readonly (string | number | symbol)[]; message: string }[]) {
+  const map: Record<string, string> = {};
+  for (const issue of issues) {
+    const key = issue.path[0];
+    if (typeof key === "string" && !map[key]) map[key] = issue.message;
+  }
+  return map;
+}
 
 export async function signIn(_previousState: AuthState, formData: FormData): Promise<AuthState> {
   const t = getDictionary(await getLocale());
@@ -19,7 +29,12 @@ export async function signIn(_previousState: AuthState, formData: FormData): Pro
     password: formData.get("password"),
   });
 
-  if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? t.auth.errors.reviewData };
+  if (!parsed.success) {
+    return {
+      error: parsed.error.issues[0]?.message ?? t.auth.errors.reviewData,
+      fieldErrors: fieldErrorsFromIssues(parsed.error.issues),
+    };
+  }
 
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({
@@ -47,6 +62,7 @@ export async function signUp(_previousState: AuthState, formData: FormData): Pro
     fullName: formData.get("fullName"),
     email: formData.get("email"),
     password: formData.get("password"),
+    confirmPassword: formData.get("confirmPassword"),
     role: formData.get("role"),
     phone: formData.get("phone"),
     gender: formData.get("gender") ?? undefined,
@@ -56,7 +72,20 @@ export async function signUp(_previousState: AuthState, formData: FormData): Pro
     hobbies: formData.get("hobbies") ?? undefined,
   });
 
-  if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? t.auth.errors.reviewData };
+  if (!parsed.success) {
+    const fieldErrors = fieldErrorsFromIssues(parsed.error.issues);
+    // Empty password fields get cleared so the user can retype them.
+    if (fieldErrors.password) fieldErrors.confirmPassword = fieldErrors.password;
+    if (fieldErrors.confirmPassword) {
+      fieldErrors.password = fieldErrors.confirmPassword;
+    }
+    return {
+      error: parsed.error.issues[0]?.message ?? t.auth.errors.reviewData,
+      fieldErrors,
+    };
+  }
+
+  const phoneE164 = toE164(parsed.data.phone);
 
   const hobbies = (parsed.data.hobbies ?? "")
     .split(/[,،]/)
@@ -68,7 +97,7 @@ export async function signUp(_previousState: AuthState, formData: FormData): Pro
   const metadata: Record<string, unknown> = {
     full_name: parsed.data.fullName,
     role: parsed.data.role,
-    phone: parsed.data.phone,
+    phone: phoneE164 ?? parsed.data.phone,
   };
 
   if (parsed.data.role === "student") {

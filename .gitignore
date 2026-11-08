@@ -10,3 +10,4 @@ env-local-backup/
 supabase/.temp/
 *.log
 *.tsbuildinfo
+.env.test.local

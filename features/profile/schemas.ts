@@ -1,11 +1,10 @@
 import { z } from "zod";
-
-const PHONE_PATTERN = /^\+?[1-9][0-9]{7,14}$/;
+import { parsePhone } from "@/lib/validation/phone";
 
 export const updateMyBasicProfileSchema = z
   .object({
     fullName: z.string().trim().min(2).max(100),
-    phone: z.string().trim().regex(PHONE_PATTERN),
+    phone: z.string().trim().refine((value) => parsePhone(value).ok, { message: "phone" }),
   })
   .strict();
 

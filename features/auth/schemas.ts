@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { Dictionary } from "@/lib/i18n/dictionary";
+import { parsePhone } from "@/lib/validation/phone";
 
 /**
  * Validation messages follow the request locale, so the schemas are built per
@@ -12,14 +13,15 @@ export function createLoginSchema(t: Dictionary) {
   });
 }
 
-const PHONE_PATTERN = /^\+?[1-9][0-9]{7,14}$/;
-
 export function createSignupSchema(t: Dictionary) {
   return createLoginSchema(t)
     .extend({
       fullName: z.string().trim().min(2, t.auth.errors.fullNameMin).max(100, t.auth.errors.fullNameMax),
       role: z.enum(["student", "owner"], t.auth.errors.roleRequired),
-      phone: z.string().trim().regex(PHONE_PATTERN, t.auth.errors.phoneInvalid),
+      phone: z
+        .string()
+        .trim()
+        .refine((value) => parsePhone(value).ok, { message: t.auth.errors.phoneInvalid }),
       gender: z.enum(["male", "female"], t.auth.errors.genderRequired).optional(),
       university: z.string().trim().max(160).optional(),
       studyYear: z
@@ -31,6 +33,7 @@ export function createSignupSchema(t: Dictionary) {
         .optional(),
       isSmoker: z.boolean(),
       hobbies: z.string().trim().max(300).optional(),
+      confirmPassword: z.string().min(1, t.auth.errors.reviewData),
     })
     .superRefine((value, ctx) => {
       if (value.role === "student" && !value.gender) {
@@ -38,6 +41,13 @@ export function createSignupSchema(t: Dictionary) {
           code: "custom",
           path: ["gender"],
           message: t.auth.errors.genderRequired,
+        });
+      }
+      if (value.password !== value.confirmPassword) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["confirmPassword"],
+          message: t.auth.errors.passwordMismatch,
         });
       }
     });
