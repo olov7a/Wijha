@@ -53,6 +53,10 @@ export async function cancelBooking(input: unknown): Promise<Result<null>> {
   const guard = await guardAction({ roles: ["student", "owner", "admin"] });
   if (!guard.ok) return guard;
 
+  // 20 cancellations per hour per user (stops mass-cancel loops).
+  const limited = await isRateLimited(guard.supabase, guard.user.id, "booking.cancelled", 20, 60);
+  if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
+
   const { error } = await guard.supabase.rpc("cancel_booking", {
     p_booking_id: parsed.data.bookingId,
     p_reason: parsed.data.reason ?? null,

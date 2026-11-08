@@ -142,7 +142,7 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
     setError(""); setNotice(""); setUploading(b.id);
     try {
       const supabase = createClient();
-      const path = `${b.id}/contract-${Date.now()}.pdf`;
+      const path = `${b.id}/contract-${crypto.randomUUID()}.pdf`;
       const { error: uploadError } = await supabase.storage.from("contracts").upload(path, file, { contentType: "application/pdf", upsert: true });
       if (uploadError) { setError(actionErrorMessage(locale, "UNEXPECTED")); return; }
       const result = await signContract({ contractId: b.contractId, filePath: path });

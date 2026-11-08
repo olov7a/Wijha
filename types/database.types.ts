@@ -713,6 +713,7 @@ export type Database = {
       };
       claim_first_admin: { Args: { p_actor: string }; Returns: undefined };
       refund_booking_payment: { Args: { p_booking_id: string }; Returns: undefined };
+      expire_pending_payments: { Args: Record<string, never>; Returns: number };
       admin_find_users: {
         Args: { p_query: string };
         Returns: {

@@ -47,6 +47,10 @@ export async function failPayment(input: unknown): Promise<Result<null>> {
   const guard = await guardAction({ roles: ["admin"] });
   if (!guard.ok) return guard;
 
+  // 20 payment failures per hour per admin.
+  const limited = await isRateLimited(guard.supabase, guard.user.id, "payment.failed", 20, 60);
+  if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
+
   const { error } = await guard.supabase.rpc("fail_booking_payment", {
     p_booking_id: parsed.data.bookingId,
     p_failure_reason: parsed.data.reason,

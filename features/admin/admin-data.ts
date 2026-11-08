@@ -124,7 +124,7 @@ export type AdminBookingView = {
   createdAt: string;
 };
 
-/** All bookings for the manual reconciliation screen. */
+/** All bookings for the manual reconciliation screen (first 200, hard-capped). */
 export async function getAdminBookings(): Promise<AdminBookingView[]> {
   if (!isSupabaseConfigured()) return [];
   const supabase = await createClient();
@@ -134,7 +134,7 @@ export async function getAdminBookings(): Promise<AdminBookingView[]> {
     .select("id, student_id, unit_id, move_in_date, total_amount_piastres, status, created_at")
     .is("deleted_at", null)
     .order("created_at", { ascending: false })
-    .limit(200);
+    .range(0, 199); // hard cap: reconciliation needs only the newest window
 
   if (error) {
     if (!MISSING.has(error.code ?? "")) console.error("getAdminBookings failed", error);

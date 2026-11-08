@@ -17,6 +17,22 @@ function safeNextPath(value: string | null) {
 }
 
 export async function GET(request: NextRequest) {
+  // Same-site origin check: a bare GET from another origin (e.g. a link in an
+  // email from a foreign site) must not trigger a session exchange.
+  const origin = request.headers.get("origin") ?? request.headers.get("referer");
+  if (origin) {
+    const allowed = process.env.NEXT_PUBLIC_SITE_URL;
+    if (allowed) {
+      try {
+        if (new URL(origin).origin !== new URL(allowed).origin) {
+          return NextResponse.redirect(new URL("/login?error=confirmation", request.url), { status: 302 });
+        }
+      } catch {
+        return NextResponse.redirect(new URL("/login?error=confirmation", request.url), { status: 302 });
+      }
+    }
+  }
+
   if (!isSupabaseConfigured()) {
     return NextResponse.redirect(new URL("/login", request.url));
   }

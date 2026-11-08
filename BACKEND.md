@@ -450,8 +450,19 @@ Deleting business data is a **state change**, not a `DELETE`. Never call `.delet
 
 ## 7. Project Data Model (fill in)
 
-> TODO: list the real tables of Wijha here (name, purpose, owner column, who can read/write). Keep it short and current, so AI agents stop guessing the schema.
+> القاعدة فعلًا بعد الـ migrations في `supabase/migrations`. كل الجداول عليها RLS، والكتابة عبر RPCs بس.
 
 | Table | Purpose | Owner column | Read | Write |
 |---|---|---|---|---|
-| _example_ `bookings` | user reservations | `user_id` | owner | owner via RPC |
+| `profiles` | هوية المستخدم | `id` | owner/staff | owner: full_name, phone فقط |
+| `student_profiles` | بيانات طالب | `user_id` | owner/staff | owner |
+| `owner_profiles` | بيانات مالك | `user_id` | owner/staff | owner |
+| `units` / `rooms` / `beds` | مخزون السكن | `owner_id → unit_id → room_id` | public approved + owner + staff | owner (create), leader (status), RPCs للحذف |
+| `unit_visits` / `unit_evaluations` | زيارات المعاينة والتقييمات الميدانية | `team_member_id` / `unit_id` | team assigned + owner + leader/admin | leader يجدول، team يقيّم مرة واحدة لكل زيارة |
+| `bookings` | حجوزات | `student_id` | student + owner + staff | `create_booking` / `cancel_booking` RPC فقط |
+| `payments` | مدفوعات (piastres + currency) | `booking_id` | student + owner + staff | `confirm/fail/refund` RPC فقط؛ محمية بالـ trigger و`payment_events` |
+| `payment_events` | سجل append-only لكل تغيير حالة دفع | `booking_id` | admin | triggers فقط |
+| `reviews` | تقييمات الطلاب | `reviewer_id` | public approved + owner + staff | الطالب يضيف pending، الأدمن يفعّل |
+| `contracts` | عقود الإيجار | `booking_id` | student/owner/staff | `request_contract` (student/owner/admin) + `sign_contract` (admin) |
+| `audit_logs` | سجل append-only | `actor_id` | admin فقط | RPCs/triggers |
+| `platform_settings` | عمولة المنصة وتحويلها | — | server/service_role | service_role |

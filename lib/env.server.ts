@@ -11,6 +11,8 @@ const serverEnvSchema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
   /** Optional bootstrap code: required to claim the first admin. Server-only. */
   BOOTSTRAP_ADMIN_SECRET: z.string().min(8).optional(),
+  /** Optional cron secret: required to call expiry jobs. Server-only. */
+  CRON_SECRET: z.string().min(16).optional(),
 });
 
 type ServerEnv = z.infer<typeof serverEnvSchema>;
@@ -27,6 +29,7 @@ export function getServerEnv(): ServerEnv {
   const parsed = serverEnvSchema.safeParse({
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
     BOOTSTRAP_ADMIN_SECRET: process.env.BOOTSTRAP_ADMIN_SECRET,
+    CRON_SECRET: process.env.CRON_SECRET,
   });
 
   if (!parsed.success) {
