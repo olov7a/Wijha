@@ -1,12 +1,10 @@
 import type { MetadataRoute } from "next";
-import { isStaging } from "@/lib/env";
 
+// MVP/test deployment: never let search engines index the site. Kept for
+// every environment until the team explicitly launches publicly.
 export default function robots(): MetadataRoute.Robots {
-  if (isStaging()) {
-    return {
-      rules: [{ userAgent: "*", disallow: "/" }],
-      host: process.env.NEXT_PUBLIC_SITE_URL,
-    };
-  }
-  return { rules: [{ userAgent: "*", allow: "/" }] };
+  return {
+    rules: [{ userAgent: "*", disallow: "/" }],
+    host: process.env.NEXT_PUBLIC_SITE_URL,
+  };
 }

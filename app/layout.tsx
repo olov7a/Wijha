@@ -21,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${t.meta.brand}`,
     },
     description: t.meta.description,
+    robots: { index: false, follow: false },
   };
 }
 
