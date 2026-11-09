@@ -139,6 +139,7 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
     event.target.value = "";
     if (!file || !b.contractId) return;
     if (file.type !== "application/pdf") { setError(locale === "ar" ? "العقد لازم يكون PDF." : "Contract must be a PDF."); return; }
+    if (file.size > 10 * 1024 * 1024) { setError(locale === "ar" ? "حجم الملف كبير جدًا (الحد 10 ميجا)." : "The file is too large (10 MB max)."); return; }
     setError(""); setNotice(""); setUploading(b.id);
     try {
       const supabase = createClient();

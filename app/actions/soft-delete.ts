@@ -170,7 +170,10 @@ export async function restoreUnitVisit(input: unknown): Promise<Result<null>> {
 // Reviews
 // ---------------------------------------------------------------------------
 export async function deleteReview(input: unknown): Promise<Result<null>> {
+  // The RPC additionally enforces that only the reviewer or an admin may
+  // delete a review; this role list is the defense-in-depth twin.
   return runEntityAction(input, {
+    roles: ["student", "admin"],
     revalidate: ["/admin", "/student", "/explore"],
     fallback: ERROR_CODES.UNEXPECTED,
     call: (supabase, id) => supabase.rpc("soft_delete_review", { p_review_id: id }),

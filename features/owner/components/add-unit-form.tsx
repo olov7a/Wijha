@@ -24,6 +24,10 @@ import { cn } from "@/lib/cn";
 
 const numberFormatter = new Intl.NumberFormat("en-US");
 const MAX_PHOTOS = 6;
+// Mirrors the `unit-photos` bucket limits in
+// `20261105126000_storage_buckets_and_policies.sql` (server re-enforces them).
+const MAX_PHOTO_BYTES = 10 * 1024 * 1024;
+const ALLOWED_PHOTO_TYPES = new Set(["image/jpeg", "image/png", "image/webp"]);
 
 const availableAmenities: AmenityKey[] = ["wifi", "ac", "laundry", "gas", "elevator", "desk", "security"];
 
@@ -220,7 +224,12 @@ export function AddUnitForm() {
 
   function selectPhotos(files: FileList | null) {
     if (!files) return;
-    setPhotos(Array.from(files).slice(0, MAX_PHOTOS));
+    setError("");
+    const accepted = Array.from(files).filter(
+      (file) => ALLOWED_PHOTO_TYPES.has(file.type) && file.size <= MAX_PHOTO_BYTES,
+    );
+    if (accepted.length < files.length) setError(labels.invalid);
+    setPhotos(accepted.slice(0, MAX_PHOTOS));
   }
 
   async function uploadPhotos(unitId: string) {
