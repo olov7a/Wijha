@@ -6,7 +6,7 @@ Each scenario: **Steps** → **Expected result**.
 ## 1. Student (student-e2e@example.com)
 
 1. Open `/signup` → fill name, phone `01012345678`, gender, university, year → create account.
-   - **Expected**: redirected to `/login?registered=1` with success message.
+   - **Expected**: redirected to `/check-email?email=...` ("Check your email") with a Resend button (60-second cooldown). Click the inbox link to confirm, then login.
 2. Login → `/student` shows bookings (empty initially).
    - **Expected**: no crash, phone saved as E.164 (`+2010...`) visible in `/profile`.
 3. `/explore` → open a unit → `/book/{id}` → pick a bed and date → submit.

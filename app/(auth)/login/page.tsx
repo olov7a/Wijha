@@ -27,6 +27,11 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           {t.auth.login.confirmationError}
         </p>
       )}
+      {error === "already_confirmed" && (
+        <p role="alert" className="mt-6 rounded-2xl bg-pending-soft px-4 py-3 text-sm leading-6 text-pending-ink">
+          {t.auth.login.alreadyConfirmed}
+        </p>
+      )}
       <AuthForm mode="login" configured={isSupabaseConfigured()} />
     </div>
   );

@@ -7,6 +7,7 @@ import { signIn, signUp } from "@/app/actions/auth";
 import { useI18n } from "@/components/providers/locale-provider";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/form-field";
+import { ResendConfirmationButton } from "@/features/auth/components/resend-confirmation-button";
 import type { AuthState } from "@/features/auth/types";
 
 function SubmitButton({ mode, configured }: { mode: "login" | "signup"; configured: boolean }) {
@@ -246,6 +247,9 @@ export function AuthForm({
         <p role="alert" className="rounded-2xl bg-rejected-soft px-4 py-3 text-sm leading-6 text-rejected-ink">
           {state.error}
         </p>
+      )}
+      {mode === "login" && state.needsResend && state.email && (
+        <ResendConfirmationButton email={state.email} />
       )}
       {state.success && (
         <p role="status" className="rounded-2xl bg-approved-soft px-4 py-3 text-sm leading-6 text-approved-ink">

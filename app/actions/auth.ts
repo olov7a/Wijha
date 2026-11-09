@@ -4,7 +4,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getDictionary } from "@/lib/i18n/dictionary";
 import { getLocale } from "@/lib/i18n/server";
-import { env, isSupabaseConfigured } from "@/lib/env";
+import { isSupabaseConfigured } from "@/lib/env";
+import { mapAuthError } from "@/lib/auth/auth-errors";
+import { getEmailRedirectTo } from "@/lib/auth/site-url";
 import { toE164 } from "@/lib/validation/phone";
 import { createClient } from "@/lib/supabase/server";
 import { createLoginSchema, createSignupSchema } from "@/features/auth/schemas";
@@ -43,10 +45,14 @@ export async function signIn(_previousState: AuthState, formData: FormData): Pro
   });
 
   if (error) {
-    if (error.code === "email_not_confirmed") {
-      return { error: t.auth.errors.emailNotConfirmed };
-    }
-    return { error: t.auth.errors.invalidCredentials };
+    const locale = await getLocale();
+    const mapped = mapAuthError(error, locale);
+    return {
+      error: mapped.message,
+      errorCode: mapped.code,
+      email: parsed.data.email,
+      needsResend: mapped.needsResend,
+    };
   }
 
   revalidatePath("/", "layout");
@@ -109,34 +115,33 @@ export async function signUp(_previousState: AuthState, formData: FormData): Pro
   }
 
   const supabase = await createClient();
-  const siteUrl = env.NEXT_PUBLIC_SITE_URL;
   const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
-      emailRedirectTo: `${siteUrl}/auth/confirm`,
+      emailRedirectTo: getEmailRedirectTo(),
       data: metadata,
     },
   });
 
   if (error) {
-    if (error.code === "over_email_send_rate_limit") {
-      return { error: t.auth.errors.emailRateLimit };
-    }
-    if (error.code === "email_address_invalid") {
-      return { error: t.auth.errors.invalidEmail };
-    }
-    return { error: t.auth.errors.signupFailed };
+    const locale = await getLocale();
+    const mapped = mapAuthError(error, locale);
+    return {
+      error: mapped.message,
+      errorCode: mapped.code,
+      email: parsed.data.email,
+    };
   }
   if (data.session) {
     revalidatePath("/", "layout");
     redirect("/dashboard");
   }
 
-  // Account created but email not confirmed yet: send the user to login so
-  // they can confirm from their inbox and then sign in.
+  // Account created but email not confirmed yet: send the user to the
+  // check-email screen where they can confirm (and resend) from the inbox.
   revalidatePath("/", "layout");
-  redirect("/login?registered=1");
+  redirect(`/check-email?email=${encodeURIComponent(parsed.data.email)}`);
 }
 
 export async function signOut() {
