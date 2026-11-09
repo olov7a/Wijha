@@ -225,23 +225,15 @@ export function RecommendationsView({ units }: { units: SampleUnit[] }) {
         return true;
       })
       .map((unit) => {
+        // Scores come only from match_units. Until the RPC returns a score we
+        // show a neutral baseline instead of fabricated boosts.
         const score = unit.matchScore ?? 80;
-
-        // Real scores from match_units already include the student's preferences;
-        // the demo boosts only apply to the curated fallback inventory.
-        if (unit.matchScore !== undefined) return { unit, score: clampScore(score) };
-
-        let demoScore = score;
-        if (sameMajor && unit.amenities.includes("desk")) demoScore += 2;
-        if (sleep === "night" && unit.amenities.includes("desk")) demoScore += 1;
-        if (unit.inspection) demoScore += 1;
-        if (unit.roomType === room) demoScore += 2;
-        return { unit, score: clampScore(demoScore) };
+        return { unit, score: clampScore(score) };
       })
       .sort((a, b) => b.score - a.score);
 
     return list;
-  }, [budget, gender, maxDistance, required, room, sameMajor, sleep, units]);
+  }, [budget, gender, maxDistance, required, room, units]);
 
   const averageScore = results.length
     ? Math.round(results.reduce((total, item) => total + item.score, 0) / results.length)

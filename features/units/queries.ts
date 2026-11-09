@@ -1,13 +1,7 @@
 import "server-only";
 
 import { isSupabaseConfigured } from "@/lib/env";
-import {
-  getSampleUnit,
-  sampleUnits,
-  type AmenityKey,
-  type LocalizedText,
-  type SampleUnit,
-} from "@/lib/sample-data";
+import type { AmenityKey, LocalizedText, SampleUnit } from "@/lib/sample-data";
 import { createClient } from "@/lib/supabase/server";
 import type { UnitListing } from "@/types/database.types";
 
@@ -51,10 +45,8 @@ const TONES: readonly SampleUnit["imageTone"][] = [
   "amber",
 ];
 
-/** Missing-table errors mean the migrations are not applied yet. */
-function isMissingSchema(error: { code?: string } | null): boolean {
-  return error?.code === "42P01" || error?.code === "PGRST205";
-}
+/** Cap the storefront to the newest approved listings (BACKEND §3.1). */
+const LISTINGS_LIMIT = 200;
 
 function toneFor(id: string): SampleUnit["imageTone"] {
   let hash = 0;
@@ -149,12 +141,13 @@ async function loadPhotos(
 }
 
 /**
- * Approved listings for the storefront. Before the migrations run the view does
- * not exist, so the curated sample set keeps the UI usable; once it does, the
- * sample set is dropped automatically.
+ * Approved listings for the storefront, from the real `unit_listings` view.
+ * Migrations are applied, so there is no sample fallback: a query error
+ * returns an empty list (pages render their empty state) instead of fake
+ * listings that a tester could mistake for real inventory.
  */
 export async function getUnitListings(): Promise<SampleUnit[]> {
-  if (!isSupabaseConfigured()) return sampleUnits;
+  if (!isSupabaseConfigured()) return [];
 
   const supabase = await createClient();
   const { data, error } = await supabase
@@ -163,11 +156,12 @@ export async function getUnitListings(): Promise<SampleUnit[]> {
       "id, owner_id, title, area, gender_type, description, amenities, status, rating, review_count, available_beds, total_beds, min_price_piastres, created_at",
     )
     .eq("status", "approved")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .limit(LISTINGS_LIMIT);
 
   if (error) {
-    if (!isMissingSchema(error)) console.error("getUnitListings failed", error);
-    return sampleUnits;
+    console.error("getUnitListings failed", error);
+    return [];
   }
 
   const listings = (data ?? []).map((row) => toUnitView(row));
@@ -191,25 +185,24 @@ export async function getUnitListings(): Promise<SampleUnit[]> {
 
 /** One listing plus its rooms and beds, for the detail and booking pages. */
 export async function getUnitView(id: string): Promise<UnitView | null> {
-  if (!isSupabaseConfigured()) return fromSample(id);
+  if (!isSupabaseConfigured()) return null;
 
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("unit_listings")
-    .select("*")
+    .select(
+      "id, owner_id, title, area, gender_type, description, amenities, status, rating, review_count, available_beds, total_beds, min_price_piastres, created_at",
+    )
     .eq("id", id)
     .maybeSingle();
 
   if (error) {
-    if (!isMissingSchema(error)) console.error("getUnitView failed", error);
-    return fromSample(id);
+    console.error("getUnitView failed", error);
+    return null;
   }
 
-  if (!data) {
-    // A stale sample link still resolves while the real catalogue is being
-    // filled, instead of turning into a 404 overnight.
-    return fromSample(id);
-  }
+  // Unknown id (or a deleted/unapproved row): the page renders 404.
+  if (!data) return null;
 
   const unit = toUnitView(data);
 
@@ -264,7 +257,4 @@ export async function getUnitView(id: string): Promise<UnitView | null> {
   };
 }
 
-function fromSample(id: string): UnitView | null {
-  const unit = getSampleUnit(id);
-  return unit ? { ...unit, rooms: [], photoUrls: [], isLive: true } : null;
-}
+

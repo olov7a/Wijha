@@ -21,8 +21,14 @@ const priceFormatter = new Intl.NumberFormat("en-US");
 export function ExploreView({ units }: { units: SampleUnit[] }) {
   const { locale } = useI18n();
   const copy = getPageCopy(locale);
+  // The slider starts wide open: its ceiling grows with the real inventory
+  // instead of silently hiding units priced above a fixed default.
+  const priceMax = Math.max(
+    6000,
+    Math.ceil(units.reduce((max, unit) => Math.max(max, unit.price), 0) / 1000) * 1000,
+  );
   const [gender, setGender] = useState<GenderFilter>("all");
-  const [maxPrice, setMaxPrice] = useState(6000);
+  const [maxPrice, setMaxPrice] = useState(priceMax);
   const [room, setRoom] = useState<RoomFilter>("all");
   const [sort, setSort] = useState<SortKey>("match");
   const [selectedAmenities, setSelectedAmenities] = useState<AmenityKey[]>([]);
@@ -55,7 +61,7 @@ export function ExploreView({ units }: { units: SampleUnit[] }) {
 
   function reset() {
     setGender("all");
-    setMaxPrice(6000);
+    setMaxPrice(priceMax);
     setRoom("all");
     setSelectedAmenities([]);
     setVerifiedOnly(false);
@@ -115,7 +121,7 @@ export function ExploreView({ units }: { units: SampleUnit[] }) {
           id="explore-price"
           type="range"
           min={1500}
-          max={6000}
+          max={priceMax}
           step={100}
           value={maxPrice}
           onChange={(event) => setMaxPrice(Number(event.target.value))}
@@ -123,7 +129,7 @@ export function ExploreView({ units }: { units: SampleUnit[] }) {
         />
         <div className="mt-1 flex justify-between text-[11px] text-slate" dir="ltr">
           <span>1,500</span>
-          <span>6,000</span>
+          <span>{priceFormatter.format(priceMax)}</span>
         </div>
       </div>
 
