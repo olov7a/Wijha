@@ -557,6 +557,9 @@ security pass) so uploads cannot overwrite or guess each other.
   realtime), `font-src 'self' data:`, `frame-ancestors 'none'`, `base-uri 'self'`,
   `form-action 'self'`. Note: `'unsafe-inline'` is required by the pre-paint theme script; a nonce
   would be the next hardening step.
+- `https://challenges.cloudflare.com` is additionally allowed in `script-src`, `connect-src` and
+  `frame-src` for the Turnstile CAPTCHA (the widget injects a script and renders its challenge in an
+  iframe). Without those entries the widget fails silently under the production CSP.
 - `Strict-Transport-Security` (2 years, includeSubDomains, preload).
 - `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`,
   `Referrer-Policy: strict-origin-when-cross-origin`,
