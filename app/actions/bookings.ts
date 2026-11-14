@@ -27,7 +27,7 @@ export async function createBooking(input: unknown): Promise<Result<{ bookingId:
 
   // 5 successful bookings per hour per student (stops bed-flooding) — backed
   // by the booking.created audit entries the RPC already writes.
-  const limited = await isRateLimited(guard.supabase, guard.user.id, "booking.created", 5, 60);
+  const limited = await isRateLimited(guard.supabase, "booking.created", 5, 60);
   if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
 
   const { data, error } = await guard.supabase.rpc("create_booking", {
@@ -54,7 +54,7 @@ export async function cancelBooking(input: unknown): Promise<Result<null>> {
   if (!guard.ok) return guard;
 
   // 20 cancellations per hour per user (stops mass-cancel loops).
-  const limited = await isRateLimited(guard.supabase, guard.user.id, "booking.cancelled", 20, 60);
+  const limited = await isRateLimited(guard.supabase, "booking.cancelled", 20, 60);
   if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
 
   const { error } = await guard.supabase.rpc("cancel_booking", {

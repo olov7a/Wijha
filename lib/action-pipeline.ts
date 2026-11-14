@@ -66,24 +66,28 @@ export async function guardAction(options: { roles?: readonly UserRole[] } = {})
 }
 
 /**
- * SQL-backed attempt limiter for abuse-prone actions (bootstrap, payments,
- * booking). Reads the append-only audit trail so no in-memory state can be
- * reset by a redeploy. Call `denyLog` on each rejection so the counter moves.
+ * SQL-backed attempt limiter for abuse-prone actions (booking, payments).
+ * Counts the caller's own rows in the append-only audit trail through a
+ * SECURITY DEFINER RPC so it works for every role: audit_logs itself stays
+ * server-only, and the function can never read another actor's rows.
  */
 export async function isRateLimited(
   supabase: SupabaseServerClient,
-  actorId: string,
   action: string,
   maxAttempts: number,
   windowMinutes: number,
 ): Promise<boolean> {
-  const since = new Date(Date.now() - windowMinutes * 60 * 1000).toISOString();
-  const { count, error } = await supabase
-    .from("audit_logs")
-    .select("id", { count: "exact", head: true })
-    .eq("actor_id", actorId)
-    .eq("action", action)
-    .gte("created_at", since);
-  if (error) return false;
-  return (count ?? 0) >= maxAttempts;
+  const { data, error } = await supabase.rpc("count_my_recent_actions", {
+    p_action: action,
+    p_window_seconds: windowMinutes * 60,
+  });
+
+  if (error) {
+    // Fail open so a missing RPC cannot lock every user out of booking;
+    // the database checks and RLS still protect the write.
+    console.error("rate limit check failed", error.code, error.message);
+    return false;
+  }
+
+  return (data ?? 0) >= maxAttempts;
 }

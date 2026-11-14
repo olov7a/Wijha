@@ -23,3 +23,12 @@ export const refundPaymentSchema = z
   .strict();
 
 export type RefundPaymentInput = z.infer<typeof refundPaymentSchema>;
+
+export const declineRefundSchema = z
+  .object({
+    bookingId: z.uuid(),
+    reason: z.string().trim().max(500).optional(),
+  })
+  .strict();
+
+export type DeclineRefundInput = z.infer<typeof declineRefundSchema>;

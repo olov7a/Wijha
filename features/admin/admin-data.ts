@@ -118,6 +118,9 @@ export type AdminBookingView = {
   paymentId: string | null;
   paymentStatus: string | null;
   paymentAmount: number | null;
+  refundAmount: number | null;
+  refundFee: number | null;
+  refundReason: string | null;
   contractId: string | null;
   contractStatus: string | null;
   contractFilePath: string | null;
@@ -150,15 +153,31 @@ export async function getAdminBookings(): Promise<AdminBookingView[]> {
   const [profilesResult, unitsResult, paymentsResult, contractsResult] = await Promise.all([
     supabase.from("profiles").select("id, full_name").in("id", studentIds),
     supabase.from("units").select("id, title").in("id", unitIds),
-    supabase.from("payments").select("id, booking_id, status, amount_piastres, created_at").in("booking_id", bookingIds).is("deleted_at", null).order("created_at", { ascending: false }),
+    supabase.from("payments").select("id, booking_id, status, amount_piastres, refund_amount_piastres, refund_fee_piastres, refund_reason, created_at").in("booking_id", bookingIds).is("deleted_at", null).order("created_at", { ascending: false }),
     supabase.from("contracts").select("id, booking_id, status, file_path").in("booking_id", bookingIds).is("deleted_at", null),
   ]);
 
   const names = new Map((profilesResult.data ?? []).map((p) => [p.id, p.full_name]));
   const titles = new Map((unitsResult.data ?? []).map((u) => [u.id, u.title]));
-  const paymentByBooking = new Map<string, { id: string; status: string; amount: number }>();
+  const paymentByBooking = new Map<string, {
+    id: string;
+    status: string;
+    amount: number;
+    refundAmount: number | null;
+    refundFee: number | null;
+    refundReason: string | null;
+  }>();
   for (const p of paymentsResult.data ?? []) {
-    if (!paymentByBooking.has(p.booking_id)) paymentByBooking.set(p.booking_id, { id: p.id, status: p.status, amount: p.amount_piastres });
+    if (!paymentByBooking.has(p.booking_id)) {
+      paymentByBooking.set(p.booking_id, {
+        id: p.id,
+        status: p.status,
+        amount: p.amount_piastres,
+        refundAmount: p.refund_amount_piastres,
+        refundFee: p.refund_fee_piastres,
+        refundReason: p.refund_reason,
+      });
+    }
   }
   const contractByBooking = new Map((contractsResult.data ?? []).map((c) => [c.booking_id, c]));
 
@@ -177,6 +196,9 @@ export async function getAdminBookings(): Promise<AdminBookingView[]> {
       paymentId: pay?.id ?? null,
       paymentStatus: pay?.status ?? null,
       paymentAmount: pay?.amount ?? null,
+      refundAmount: pay?.refundAmount ?? null,
+      refundFee: pay?.refundFee ?? null,
+      refundReason: pay?.refundReason ?? null,
       contractId: contract?.id ?? null,
       contractStatus: contract?.status ?? null,
       contractFilePath: contract?.file_path ?? null,

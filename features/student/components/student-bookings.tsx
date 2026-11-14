@@ -70,8 +70,12 @@ export function StudentBookings({ bookings, name }: { bookings: StudentBookingVi
           contractRequested: "العقد مطلوب وبانتظار توقيع الإدارة",
           cancelling: "بيتم الإلغاء...",
           requesting: "بيتم طلب العقد...",
-          cancelConfirm: "متأكد إنك عايز تلغي الحجز؟",
+          cancelConfirm: "متأكد إنك عايز تلغي الحجز؟ لو الإلغاء قبل 24 ساعة من الاستلام، بيتم استرداد المبلغ بعد خصم رسوم البوابة.",
           cancelDone: "تم إلغاء الحجز.",
+          refundPending: "استرداد مستحق",
+          refundFee: "رسوم البوابة",
+          refunded: "تم استرداد",
+          noRefund: "الإلغاء بعد مدة الاسترداد — لا يوجد مبلغ مسترد.",
           contractDone: "تم إرسال طلب العقد للأدمن.",
           downloadError: "ملف العقد لسه مش جاهز.",
           status: {
@@ -85,6 +89,7 @@ export function StudentBookings({ bookings, name }: { bookings: StudentBookingVi
             paid: "مدفوع",
             failed: "فشل",
             refunded: "مسترد",
+            refund_pending: "قيد الاسترداد",
             expired: "منتهية",
           },
           contractStatus: {
@@ -118,8 +123,12 @@ export function StudentBookings({ bookings, name }: { bookings: StudentBookingVi
           contractRequested: "Contract requested and waiting for an admin signature",
           cancelling: "Cancelling...",
           requesting: "Requesting...",
-          cancelConfirm: "Cancel this booking?",
+          cancelConfirm: "Cancel this booking? If you cancel at least 24 hours before check-in, the amount is refunded after the gateway fee.",
           cancelDone: "The booking was cancelled.",
+          refundPending: "Refund due",
+          refundFee: "Gateway fee",
+          refunded: "Refunded",
+          noRefund: "Cancelled after the refund deadline — no refund is due.",
           contractDone: "The contract request was sent to the admin.",
           downloadError: "The contract file is not ready yet.",
           status: {
@@ -133,6 +142,7 @@ export function StudentBookings({ bookings, name }: { bookings: StudentBookingVi
             paid: "Paid",
             failed: "Failed",
             refunded: "Refunded",
+            refund_pending: "Refund pending",
             expired: "Expired",
           },
           contractStatus: {
@@ -334,6 +344,21 @@ export function StudentBookings({ bookings, name }: { bookings: StudentBookingVi
                     </p>
                   </div>
                 </div>
+
+                {booking.paymentStatus === "refund_pending" && (
+                  <div className="border-t border-line bg-pending-soft/50 px-5 py-3 text-xs font-bold text-pending-ink">
+                    {labels.refundPending}: <span dir="ltr">{money.format(Math.round((booking.refundAmountPiastres ?? 0) / 100))} EGP</span>
+                    {booking.refundFeePiastres ? <> • {labels.refundFee}: <span dir="ltr">{money.format(Math.round(booking.refundFeePiastres / 100))} EGP</span></> : null}
+                  </div>
+                )}
+                {booking.paymentStatus === "refunded" && booking.refundAmountPiastres !== null && (
+                  <div className="border-t border-line bg-approved-soft px-5 py-3 text-xs font-bold text-approved-ink">
+                    {labels.refunded}: <span dir="ltr">{money.format(Math.round(booking.refundAmountPiastres / 100))} EGP</span>
+                  </div>
+                )}
+                {booking.paymentStatus === "paid" && booking.status === "cancelled" && booking.refundReason?.toLowerCase().includes("deadline") && (
+                  <div className="border-t border-line bg-canvas px-5 py-3 text-xs font-bold text-slate">{labels.noRefund}</div>
+                )}
 
                 <div className="flex flex-wrap items-center gap-2 border-t border-line bg-canvas/40 px-5 py-4">
                   {booking.contractStatus === "signed" && booking.contractId && (

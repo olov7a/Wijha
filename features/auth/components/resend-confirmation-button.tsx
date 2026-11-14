@@ -8,6 +8,7 @@ import { mapAuthError } from "@/lib/auth/auth-errors";
 import { getClientEmailRedirectTo } from "@/lib/auth/site-url";
 import { getCooldownRemainingSeconds } from "@/lib/auth/resend-cooldown";
 import { createClient } from "@/lib/supabase/client";
+import { TurnstileWidget } from "@/features/auth/components/turnstile-widget";
 
 /**
  * "Resend confirmation email" with a 60-second cooldown. Used both on the
@@ -20,6 +21,8 @@ export function ResendConfirmationButton({ email, className }: { email: string; 
   const [now, setNow] = useState<number>(() => Date.now());
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState<{ kind: "success" | "error"; text: string } | null>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [captchaResetKey, setCaptchaResetKey] = useState(0);
 
   // Pure cooldown math lives in `lib/auth/resend-cooldown` so it can be
   // unit-tested; this effect only ticks the clock once per second.
@@ -41,7 +44,10 @@ export function ResendConfirmationButton({ email, className }: { email: string; 
       const { error } = await supabase.auth.resend({
         type: "signup",
         email,
-        options: { emailRedirectTo: getClientEmailRedirectTo() },
+        options: {
+          emailRedirectTo: getClientEmailRedirectTo(),
+          captchaToken: captchaToken ?? undefined,
+        },
       });
       if (error) {
         const mapped = mapAuthError(error, locale);
@@ -56,6 +62,8 @@ export function ResendConfirmationButton({ email, className }: { email: string; 
       setMessage({ kind: "success", text: t.auth.checkEmail.resendSent });
     } finally {
       setPending(false);
+      setCaptchaToken(null);
+      setCaptchaResetKey((value) => value + 1);
     }
   }
 
@@ -67,6 +75,7 @@ export function ResendConfirmationButton({ email, className }: { email: string; 
 
   return (
     <div className={className}>
+      <TurnstileWidget onToken={setCaptchaToken} resetKey={captchaResetKey} />
       <Button type="button" onClick={handleResend} disabled={disabled} className="w-full" aria-disabled={disabled}>
         {label}
       </Button>

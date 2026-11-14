@@ -60,6 +60,9 @@ export type StudentBookingView = {
   totalPiastres: number;
   status: BookingStatus;
   paymentStatus: PaymentStatus | null;
+  refundAmountPiastres: number | null;
+  refundFeePiastres: number | null;
+  refundReason: string | null;
   contractId: string | null;
   contractStatus: ContractStatus;
   createdAt: string;
@@ -100,7 +103,7 @@ export async function getStudentBookings(): Promise<StudentBookingView[]> {
   const [paymentsResult, contractsResult, unitsResult, roomsResult, bedsResult] = await Promise.all([
     supabase
       .from("payments")
-      .select("booking_id, status, created_at")
+      .select("booking_id, status, refund_amount_piastres, refund_fee_piastres, refund_reason, created_at")
       .in("booking_id", bookingIds)
       .is("deleted_at", null)
       .order("created_at", { ascending: false }),
@@ -116,10 +119,22 @@ export async function getStudentBookings(): Promise<StudentBookingView[]> {
       : Promise.resolve({ data: [] as { id: string; label: string }[], error: null }),
   ]);
 
-  const paymentByBooking = new Map<string, PaymentStatus>();
+  type PaymentSummary = {
+    status: PaymentStatus;
+    refundAmount: number | null;
+    refundFee: number | null;
+    refundReason: string | null;
+  };
+
+  const paymentByBooking = new Map<string, PaymentSummary>();
   for (const payment of paymentsResult.data ?? []) {
     if (!paymentByBooking.has(payment.booking_id)) {
-      paymentByBooking.set(payment.booking_id, payment.status);
+      paymentByBooking.set(payment.booking_id, {
+        status: payment.status,
+        refundAmount: payment.refund_amount_piastres,
+        refundFee: payment.refund_fee_piastres,
+        refundReason: payment.refund_reason,
+      });
     }
   }
 
@@ -136,6 +151,7 @@ export async function getStudentBookings(): Promise<StudentBookingView[]> {
   return rows.map((booking) => {
     const unit = unitById.get(booking.unit_id);
     const contract = contractByBooking.get(booking.id);
+    const payment = paymentByBooking.get(booking.id);
     return {
       id: booking.id,
       unitId: booking.unit_id,
@@ -148,7 +164,10 @@ export async function getStudentBookings(): Promise<StudentBookingView[]> {
       rentPiastres: booking.rent_amount_piastres,
       totalPiastres: booking.total_amount_piastres,
       status: booking.status,
-      paymentStatus: paymentByBooking.get(booking.id) ?? null,
+      paymentStatus: payment?.status ?? null,
+      refundAmountPiastres: payment?.refundAmount ?? null,
+      refundFeePiastres: payment?.refundFee ?? null,
+      refundReason: payment?.refundReason ?? null,
       contractId: contract?.id ?? null,
       contractStatus: contract?.status ?? "not_requested",
       createdAt: booking.created_at,

@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { guardAction, failureResult, isRateLimited } from "@/lib/action-pipeline";
 import { ERROR_CODES } from "@/lib/errors";
 import type { Result } from "@/lib/result";
-import { confirmPaymentSchema, failPaymentSchema, refundPaymentSchema } from "@/features/payments/schemas";
+import { confirmPaymentSchema, declineRefundSchema, failPaymentSchema, refundPaymentSchema } from "@/features/payments/schemas";
 
 const AFFECTED_PATHS = ["/student", "/owner", "/admin"] as const;
 
@@ -25,7 +25,7 @@ export async function confirmPayment(input: unknown): Promise<Result<null>> {
   if (!guard.ok) return guard;
 
   // 20 payment confirmations per hour per admin (stops reconciliation spam).
-  const limited = await isRateLimited(guard.supabase, guard.user.id, "payment.confirmed", 20, 60);
+  const limited = await isRateLimited(guard.supabase, "payment.confirmed", 20, 60);
   if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
 
   const { error } = await guard.supabase.rpc("confirm_booking_payment", {
@@ -48,7 +48,7 @@ export async function failPayment(input: unknown): Promise<Result<null>> {
   if (!guard.ok) return guard;
 
   // 20 payment failures per hour per admin.
-  const limited = await isRateLimited(guard.supabase, guard.user.id, "payment.failed", 20, 60);
+  const limited = await isRateLimited(guard.supabase, "payment.failed", 20, 60);
   if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
 
   const { error } = await guard.supabase.rpc("fail_booking_payment", {
@@ -70,8 +70,57 @@ export async function refundPayment(input: unknown): Promise<Result<null>> {
   const guard = await guardAction({ roles: ["admin"] });
   if (!guard.ok) return guard;
 
+  const limited = await isRateLimited(guard.supabase, "payment.refunded", 20, 60);
+  if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
+
   const { error } = await guard.supabase.rpc("refund_booking_payment", {
     p_booking_id: parsed.data.bookingId,
+  });
+
+  if (error) return failureResult(error);
+
+  revalidateAffected();
+  return { ok: true, data: null };
+}
+
+/**
+ * Execute the transfer for a refund the policy already approved
+ * (`refund_pending` -> `refunded`). Admin-only.
+ */
+export async function confirmRefund(input: unknown): Promise<Result<null>> {
+  const parsed = refundPaymentSchema.safeParse(input);
+  if (!parsed.success) return { ok: false, error: ERROR_CODES.INVALID_INPUT };
+
+  const guard = await guardAction({ roles: ["admin"] });
+  if (!guard.ok) return guard;
+
+  const limited = await isRateLimited(guard.supabase, "payment.refund_confirmed", 20, 60);
+  if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
+
+  const { error } = await guard.supabase.rpc("confirm_booking_refund", {
+    p_booking_id: parsed.data.bookingId,
+  });
+
+  if (error) return failureResult(error);
+
+  revalidateAffected();
+  return { ok: true, data: null };
+}
+
+/** Reject a pending refund and return the payment to `paid`. Admin-only. */
+export async function declineRefund(input: unknown): Promise<Result<null>> {
+  const parsed = declineRefundSchema.safeParse(input);
+  if (!parsed.success) return { ok: false, error: ERROR_CODES.INVALID_INPUT };
+
+  const guard = await guardAction({ roles: ["admin"] });
+  if (!guard.ok) return guard;
+
+  const limited = await isRateLimited(guard.supabase, "payment.refund_declined", 20, 60);
+  if (limited) return { ok: false, error: ERROR_CODES.FORBIDDEN };
+
+  const { error } = await guard.supabase.rpc("decline_booking_refund", {
+    p_booking_id: parsed.data.bookingId,
+    p_reason: parsed.data.reason ?? null,
   });
 
   if (error) return failureResult(error);

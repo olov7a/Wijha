@@ -52,6 +52,8 @@ export type Database = {
         Row: {
           id: boolean;
           commission_rate: number;
+          gateway_fee_rate: number;
+          cancellation_window_hours: number;
           currency: string;
           updated_by: string | null;
           created_at: Timestamp;
@@ -60,6 +62,8 @@ export type Database = {
         Insert: {
           id?: boolean;
           commission_rate?: number;
+          gateway_fee_rate?: number;
+          cancellation_window_hours?: number;
           currency?: string;
           updated_by?: string | null;
           created_at?: Timestamp;
@@ -68,6 +72,8 @@ export type Database = {
         Update: {
           id?: boolean;
           commission_rate?: number;
+          gateway_fee_rate?: number;
+          cancellation_window_hours?: number;
           currency?: string;
           updated_by?: string | null;
           created_at?: Timestamp;
@@ -407,6 +413,11 @@ export type Database = {
           failure_reason: string | null;
           paid_at: Timestamp | null;
           expires_at: Timestamp | null;
+          refund_amount_piastres: number | null;
+          refund_fee_piastres: number;
+          refund_requested_at: Timestamp | null;
+          refunded_at: Timestamp | null;
+          refund_reason: string | null;
           created_at: Timestamp;
           updated_at: Timestamp;
           deleted_at: Timestamp | null;
@@ -423,6 +434,11 @@ export type Database = {
           failure_reason?: string | null;
           paid_at?: Timestamp | null;
           expires_at?: Timestamp | null;
+          refund_amount_piastres?: number | null;
+          refund_fee_piastres?: number;
+          refund_requested_at?: Timestamp | null;
+          refunded_at?: Timestamp | null;
+          refund_reason?: string | null;
           created_at?: Timestamp;
           updated_at?: Timestamp;
           deleted_at?: Timestamp | null;
@@ -439,6 +455,11 @@ export type Database = {
           failure_reason?: string | null;
           paid_at?: Timestamp | null;
           expires_at?: Timestamp | null;
+          refund_amount_piastres?: number | null;
+          refund_fee_piastres?: number;
+          refund_requested_at?: Timestamp | null;
+          refunded_at?: Timestamp | null;
+          refund_reason?: string | null;
           created_at?: Timestamp;
           updated_at?: Timestamp;
           deleted_at?: Timestamp | null;
@@ -713,6 +734,15 @@ export type Database = {
       };
       claim_first_admin: { Args: { p_actor: string }; Returns: undefined };
       refund_booking_payment: { Args: { p_booking_id: string }; Returns: undefined };
+      confirm_booking_refund: { Args: { p_booking_id: string }; Returns: undefined };
+      decline_booking_refund: {
+        Args: { p_booking_id: string; p_reason?: string | null };
+        Returns: undefined;
+      };
+      count_my_recent_actions: {
+        Args: { p_action: string; p_window_seconds?: number };
+        Returns: number;
+      };
       expire_pending_payments: { Args: Record<string, never>; Returns: number };
       admin_find_users: {
         Args: { p_query: string };
@@ -731,7 +761,7 @@ export type Database = {
       unit_status: "pending" | "approved" | "rejected";
       bed_status: "available" | "held" | "booked";
       booking_status: "pending_payment" | "confirmed" | "cancelled" | "completed";
-      payment_status: "pending" | "paid" | "failed" | "refunded" | "expired";
+      payment_status: "pending" | "paid" | "failed" | "refunded" | "refund_pending" | "expired";
       review_target_type: "unit" | "student";
       moderation_status: "pending" | "approved" | "rejected";
       contract_status: "not_requested" | "requested" | "signed";

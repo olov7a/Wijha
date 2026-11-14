@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition, type ChangeEvent } from "react";
-import { confirmPayment, failPayment, refundPayment } from "@/app/actions/payments";
+import { confirmPayment, failPayment, refundPayment, confirmRefund, declineRefund } from "@/app/actions/payments";
 import { signContract } from "@/app/actions/contracts";
 import { getContractDownloadUrl } from "@/app/actions/profile";
 import { useI18n } from "@/components/providers/locale-provider";
@@ -57,6 +57,13 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
           doneFail: "تم تسجيل فشل الدفع وإلغاء الحجز.",
           doneRefund: "تم تنفيذ الاسترداد.",
           refund: "استرداد (أدمن)",
+          refundPending: "استرداد مستحق",
+          refundDue: "المطلوب ردّه",
+          gatewayFee: "رسوم البوابة",
+          confirmRefund: "تأكيد تحويل الاسترداد",
+          declineRefund: "رفض الاسترداد",
+          doneConfirmRefund: "تم تسجيل الاسترداد بعد التحويل.",
+          doneDeclineRefund: "تم رفض الاسترداد وإرجاع الدفعة لـ«مدفوع».",
           doneSign: "تم توقيع العقد وإرفاقه.",
           empty: "لا توجد حجوزات مرتبطة للمطابقة بعد.",
           statusMap: { pending_payment: "بانتظار الدفع", confirmed: "مؤكد", cancelled: "ملغي", completed: "مكتمل" },
@@ -87,6 +94,13 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
           doneFail: "Payment failure recorded and booking cancelled.",
           doneRefund: "Refund executed.",
           refund: "Refund (admin)",
+          refundPending: "Refund due",
+          refundDue: "Amount to return",
+          gatewayFee: "Gateway fee",
+          confirmRefund: "Confirm refund transfer",
+          declineRefund: "Decline refund",
+          doneConfirmRefund: "Refund recorded after the transfer.",
+          doneDeclineRefund: "Refund declined; payment is back to paid.",
           doneSign: "Contract signed and attached.",
           empty: "No bookings to reconcile yet.",
           statusMap: { pending_payment: "Pending payment", confirmed: "Confirmed", cancelled: "Cancelled", completed: "Completed" },
@@ -98,7 +112,7 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
     tab === "all"
       ? bookings
       : tab === "payments"
-        ? bookings.filter((b) => b.paymentStatus === "pending")
+        ? bookings.filter((b) => b.paymentStatus === "pending" || b.paymentStatus === "refund_pending")
         : bookings.filter((b) => b.contractStatus === "requested" || b.contractStatus === "signed");
 
   function run(id: string, task: () => Promise<void>) {
@@ -131,6 +145,27 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
       const result = await refundPayment({ bookingId: b.id });
       if (!result.ok) { setError(actionErrorMessage(locale, result.error)); return; }
       setNotice(labels.doneRefund); router.refresh();
+    });
+  }
+
+  async function confirmRefundTransfer(b: AdminBookingView) {
+    if (!window.confirm(locale === "ar" ? "تم تحويل مبلغ الاسترداد للطالب فعلاً؟" : "Has the refund actually been transferred to the student?")) return;
+    run(b.id, async () => {
+      const result = await confirmRefund({ bookingId: b.id });
+      if (!result.ok) { setError(actionErrorMessage(locale, result.error)); return; }
+      setNotice(labels.doneConfirmRefund); router.refresh();
+    });
+  }
+
+  async function declineRefundTransfer(b: AdminBookingView) {
+    if (!window.confirm(locale === "ar" ? "رفض الاسترداد وإرجاع الدفعة لـ«مدفوع»؟" : "Decline the refund and mark the payment paid again?")) return;
+    run(b.id, async () => {
+      const result = await declineRefund({
+        bookingId: b.id,
+        reason: locale === "ar" ? "الاسترداد مرفوض من الإدارة" : "refund declined by admin",
+      });
+      if (!result.ok) { setError(actionErrorMessage(locale, result.error)); return; }
+      setNotice(labels.doneDeclineRefund); router.refresh();
     });
   }
 
@@ -202,7 +237,7 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <span className="rounded-full bg-canvas px-3 py-1 text-xs font-bold text-slate">{labels.status}: {labels.statusMap[b.status as keyof typeof labels.statusMap] ?? b.status}</span>
-                    <span className={cn("rounded-full px-3 py-1 text-xs font-bold", b.paymentStatus === "paid" ? "bg-approved-soft text-approved-ink" : b.paymentStatus === "failed" ? "bg-rejected-soft text-rejected-ink" : "bg-pending-soft text-pending-ink")}>
+                    <span className={cn("rounded-full px-3 py-1 text-xs font-bold", b.paymentStatus === "paid" || b.paymentStatus === "refunded" ? "bg-approved-soft text-approved-ink" : b.paymentStatus === "failed" ? "bg-rejected-soft text-rejected-ink" : "bg-pending-soft text-pending-ink")}>
                       {labels.payment}: {b.paymentStatus ?? "—"} • {money.format(Math.round((b.paymentAmount ?? b.totalPiastres) / 100))} EGP
                     </span>
                     <span className="rounded-full bg-canvas px-3 py-1 text-xs font-bold text-slate">{labels.contract}: {b.contractStatus ?? "not_requested"}</span>
@@ -224,6 +259,27 @@ export function PaymentsPanel({ bookings }: { bookings: AdminBookingView[] }) {
                       </div>
                     ) : (
                       <p className="mt-2 text-xs text-slate">{labels.needPayment}</p>
+                    )}
+                    {b.paymentStatus === "refund_pending" && (
+                      <div className="mt-3 rounded-2xl border border-line bg-pending-soft/60 p-3">
+                        <p className="text-xs font-bold text-pending-ink">
+                          {labels.refundPending}: <span dir="ltr">{money.format(Math.round((b.refundAmount ?? 0) / 100))} EGP</span>
+                          {b.refundFee ? <> • {labels.gatewayFee}: <span dir="ltr">{money.format(Math.round(b.refundFee / 100))} EGP</span></> : null}
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          <Button type="button" size="sm" onClick={() => confirmRefundTransfer(b)} disabled={busy}>
+                            <CheckIcon className="size-4" />{labels.confirmRefund}
+                          </Button>
+                          <Button type="button" size="sm" variant="danger" onClick={() => declineRefundTransfer(b)} disabled={busy}>
+                            <XIcon className="size-4" />{labels.declineRefund}
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                    {b.paymentStatus === "refunded" && b.refundAmount !== null && (
+                      <p className="mt-3 rounded-2xl bg-approved-soft px-3 py-2 text-xs font-bold text-approved-ink">
+                        {labels.doneRefund} <span dir="ltr">{money.format(Math.round(b.refundAmount / 100))} EGP</span>
+                      </p>
                     )}
                     {b.paymentStatus === "paid" && (
                       <Button type="button" size="sm" variant="secondary" onClick={() => refundPaid(b)} disabled={busy} className="mt-3">

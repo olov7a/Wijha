@@ -10,6 +10,7 @@ const publicEnvSchema = z.object({
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: z.string().min(1).optional(),
   NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
   NEXT_PUBLIC_APP_ENV: z.enum(["production", "staging", "development"]).default("production"),
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().min(1).optional(),
 });
 
 function emptyToUndefined(value: string | undefined) {
@@ -25,6 +26,7 @@ const parsedPublicEnv = publicEnvSchema.parse({
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: emptyToUndefined(process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY),
   NEXT_PUBLIC_SITE_URL: emptyToUndefined(process.env.NEXT_PUBLIC_SITE_URL),
   NEXT_PUBLIC_APP_ENV: emptyToUndefined(process.env.NEXT_PUBLIC_APP_ENV) ?? "production",
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: emptyToUndefined(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY),
 });
 
 export const env = parsedPublicEnv;
