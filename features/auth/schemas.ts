@@ -13,6 +13,31 @@ export function createLoginSchema(t: Dictionary) {
   });
 }
 
+/** Forgot-password request: only the email is needed. */
+export function createForgotPasswordSchema(t: Dictionary) {
+  return z.object({
+    email: z.email(t.auth.errors.invalidEmail).max(320),
+  });
+}
+
+/** Set a new password after following a recovery link. */
+export function createResetPasswordSchema(t: Dictionary) {
+  return z
+    .object({
+      password: z.string().min(8, t.auth.errors.passwordMin).max(72),
+      confirmPassword: z.string().min(1, t.auth.errors.reviewData),
+    })
+    .superRefine((value, ctx) => {
+      if (value.password !== value.confirmPassword) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["confirmPassword"],
+          message: t.auth.errors.passwordMismatch,
+        });
+      }
+    });
+}
+
 export function createSignupSchema(t: Dictionary) {
   return createLoginSchema(t)
     .extend({

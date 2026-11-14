@@ -8,6 +8,7 @@ import { useI18n } from "@/components/providers/locale-provider";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/form-field";
 import { ResendConfirmationButton } from "@/features/auth/components/resend-confirmation-button";
+import { TurnstileWidget } from "@/features/auth/components/turnstile-widget";
 import type { AuthState } from "@/features/auth/types";
 
 function SubmitButton({ mode, configured }: { mode: "login" | "signup"; configured: boolean }) {
@@ -33,6 +34,7 @@ export function AuthForm({
   const [state, formAction] = useActionState<AuthState, FormData>(mode === "login" ? signIn : signUp, {});
   const { t, locale: localeConfirm } = useI18n();
   const [role, setRole] = useState<"student" | "owner">(defaultRole);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   // Show every field error under its input and keep valid fields intact.
@@ -221,6 +223,13 @@ export function AuthForm({
           hint={mode === "signup" ? t.auth.form.passwordHint : undefined}
           error={state.fieldErrors?.password}
         />
+        {mode === "login" && (
+          <p className="-mt-2 text-end text-sm">
+            <Link href="/forgot-password" className="font-bold text-teal hover:underline">
+              {t.auth.form.forgotLink}
+            </Link>
+          </p>
+        )}
         {mode === "signup" && (
           <Input
             name="confirmPassword"
@@ -236,6 +245,8 @@ export function AuthForm({
             error={state.fieldErrors?.confirmPassword}
           />
         )}
+        <TurnstileWidget onToken={setCaptchaToken} />
+        <input type="hidden" name="captchaToken" value={captchaToken ?? ""} />
       </fieldset>
 
       {!configured && (

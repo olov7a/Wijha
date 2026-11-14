@@ -8,8 +8,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title: t.meta.login };
 }
 
-export default async function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string; registered?: string }> }) {
-  const { error, registered } = await searchParams;
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string; registered?: string; reset?: string }>;
+}) {
+  const { error, registered, reset } = await searchParams;
   const { t } = await getI18n();
 
   return (
@@ -20,6 +24,11 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
       {registered === "1" && (
         <p role="status" className="mt-6 rounded-2xl bg-approved-soft px-4 py-3 text-sm leading-6 text-approved-ink">
           {t.auth.errors.signupSuccess}
+        </p>
+      )}
+      {reset === "1" && (
+        <p role="status" className="mt-6 rounded-2xl bg-approved-soft px-4 py-3 text-sm leading-6 text-approved-ink">
+          {t.auth.reset.success}
         </p>
       )}
       {error === "confirmation" && (

@@ -28,7 +28,24 @@ Each scenario: **Steps** → **Expected result**.
 2. `/admin/payments` → confirm / fail / refund / sign contract → booking status moves accordingly.
 3. Promote a fresh account (Search by email) → role changes immediately.
 
-## 4. Security-minded tester (try to break it)
+## 4. Password recovery (any account)
+
+1. `/login` → "Forgot your password?" → `/forgot-password` → enter the account email.
+   - **Expected**: a generic "check your email" state, whether or not the account
+     exists (no user enumeration). No error is shown for unknown emails.
+2. Open the inbox link **in the same browser**.
+   - **Expected**: `/auth/reset` → `/reset-password` with the two password fields.
+3. Enter a password under 8 characters, then two different passwords.
+   - **Expected**: field-level error on each case; nothing is saved.
+4. Enter a valid new password twice.
+   - **Expected**: redirected to `/login?reset=1` with the success banner, and the
+     recovery session is gone (opening `/reset-password` again shows the
+     "link isn't valid" state).
+5. Open the same recovery link a second time (or in another browser).
+   - **Expected**: `/forgot-password?error=link_invalid` with a clear "request a
+     new link" message — not a login error.
+
+## 5. Security-minded tester (try to break it)
 
 - **Cross-user reads**: keeping dev keys in hand, call:
   ```
@@ -46,9 +63,9 @@ Each scenario: **Steps** → **Expected result**.
 - **Upload**: try booking payload as `owner`. Try (`20099` reference) same reference twice.
   - **Expected**: second attempt fails `23505` / idempotent.
 
-## 5. Mobile / slow network
+## 6. Mobile / slow network
 
-- Open `/login`, `/signup`, `/explore`, `/student` on throttled network (Slow 3G).
+- Open `/login`, `/signup`, `/forgot-password`, `/explore`, `/student` on throttled network (Slow 3G).
   - **Expected**: no horizontal scroll, buttons stay enabled after the request finishes, no console errors after initial load.
 
 ---

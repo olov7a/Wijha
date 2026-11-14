@@ -5,6 +5,17 @@ Do **not** commit secrets (SMTP password, `service_role` key) to this repo.
 
 Production site: `https://wijha-rho.vercel.app`
 
+## 0. Current status (verified 2026-11-14 via the Supabase CLI)
+
+- **Custom SMTP**: enabled (`smtp.gmail.com:465`, sender `Wijha <wijhap@gmail.com>`).
+- **Email confirmation**: **ON** (`auth.email.enable_confirmations = true`).
+- **Site URL**: `https://wijha-rho.vercel.app`.
+- **Redirect URLs**: exact entries for `/auth/callback`, `/auth/reset` and
+  `/auth/confirm` on the production domain and on `localhost`/`127.0.0.1:3000`.
+- **CAPTCHA**: **OFF** — it stays off until the Turnstile *site key* is set in
+  Vercel, the build that renders the widget is deployed, and the *secret* is
+  pasted into the dashboard. Enabling it earlier rejects every sign-in.
+
 ## 1. Custom SMTP (names only — fill values in the dashboard)
 
 Supabase → **Authentication → SMTP Settings → Enable custom SMTP**, then enter:
@@ -20,21 +31,28 @@ Supabase → **Authentication → SMTP Settings → Enable custom SMTP**, then e
 
 ## 2. Email confirmation
 
-- [ ] Supabase → **Authentication → Providers → Email**: **Confirm email = ON**.
+- [x] Supabase → **Authentication → Providers → Email**: **Confirm email = ON**.
 - [ ] With confirmation ON, signup lands on `/check-email` and the inbox link
       goes to `/auth/callback` (see `lib/auth/site-url.ts`).
+- [ ] **Password recovery** links go to `/auth/reset`, which exchanges the code
+      and forwards to `/reset-password`. Requested from `/forgot-password`.
 
 ## 3. URL configuration
 
 Supabase → **Authentication → URL Configuration**:
 
-- [ ] **Site URL** = `https://wijha-rho.vercel.app`
-- [ ] **Redirect URLs** — add both:
-  - `https://wijha-rho.vercel.app/**`
-  - `http://localhost:3000/**`
+- [x] **Site URL** = `https://wijha-rho.vercel.app`
+- [x] **Redirect URLs** — exact paths configured (see status above):
+  - `https://wijha-rho.vercel.app/auth/callback` (signup confirmation)
+  - `https://wijha-rho.vercel.app/auth/reset` (password recovery)
+  - `https://wijha-rho.vercel.app/auth/confirm` (legacy links)
+  - the same three on `http://localhost:3000` and `http://127.0.0.1:3000`
+- [ ] If you ever move to a new domain, add `<new-site>/auth/callback` and
+      `<new-site>/auth/reset` there before switching `NEXT_PUBLIC_SITE_URL`.
 
 The app's callback is `https://wijha-rho.vercel.app/auth/callback` (legacy
-links to `/auth/confirm` still work — see `app/auth/confirm/route.ts`).
+links to `/auth/confirm` still work — see `app/auth/confirm/route.ts`), and
+recovery links use `https://wijha-rho.vercel.app/auth/reset`.
 
 ## 4. Vercel environment variables
 

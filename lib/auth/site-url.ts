@@ -6,6 +6,7 @@
 
 const FALLBACK_SITE_URL = "http://localhost:3000";
 const CALLBACK_PATH = "/auth/callback";
+const RESET_CALLBACK_PATH = "/auth/reset";
 
 function stripTrailingSlash(value: string) {
   return value.endsWith("/") ? value.slice(0, -1) : value;
@@ -27,6 +28,28 @@ export function getSiteUrl() {
 /** Absolute callback URL used as `options.emailRedirectTo` on the server. */
 export function getEmailRedirectTo() {
   return `${getSiteUrl()}${CALLBACK_PATH}`;
+}
+
+/**
+ * Recovery links use a dedicated callback with no query string, so the
+ * redirect target matches the Supabase allow-list exactly. That route
+ * exchanges the code for a session and forwards to `/reset-password`.
+ */
+export function getPasswordResetRedirectTo() {
+  return `${getSiteUrl()}${RESET_CALLBACK_PATH}`;
+}
+
+/**
+ * Only allow same-site relative paths as a post-auth destination. Rejects
+ * `//evil.com`, absolute URLs, backslashes and control characters so the
+ * callback can never become an open redirect.
+ */
+export function safeNextPath(value: string | null | undefined) {
+  if (!value) return null;
+  if (!value.startsWith("/") || value.startsWith("//")) return null;
+  if (value.includes("\\") || value.includes("://")) return null;
+  if (/[\u0000-\u001f\u007f]/.test(value)) return null;
+  return value;
 }
 
 /**

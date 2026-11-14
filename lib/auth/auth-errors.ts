@@ -25,7 +25,16 @@ export type MappedAuthError = {
 
 type Rule = {
   code: string;
-  messageKey: "emailRateLimit" | "emailNotAuthorized" | "userAlreadyExists" | "invalidCredentials" | "emailNotConfirmed" | "weakPassword" | "invalidEmail";
+  messageKey:
+    | "emailRateLimit"
+    | "emailNotAuthorized"
+    | "userAlreadyExists"
+    | "invalidCredentials"
+    | "emailNotConfirmed"
+    | "weakPassword"
+    | "samePassword"
+    | "invalidEmail"
+    | "captchaFailed";
   needsResend?: boolean;
   messageHints?: string[];
 };
@@ -41,6 +50,8 @@ const RULES: Rule[] = [
   { code: "user_already_exists", messageKey: "userAlreadyExists", messageHints: ["already registered", "already exists", "user already"] },
   { code: "email_not_confirmed", messageKey: "emailNotConfirmed", needsResend: true, messageHints: ["email not confirmed", "not confirmed", "not verified"] },
   { code: "weak_password", messageKey: "weakPassword", messageHints: ["weak password"] },
+  { code: "same_password", messageKey: "samePassword", messageHints: ["different from the old password", "same password"] },
+  { code: "captcha_failed", messageKey: "captchaFailed", messageHints: ["captcha"] },
   // Callers treat this as a generic invalid login to avoid user enumeration.
   { code: "invalid_credentials", messageKey: "invalidCredentials", messageHints: ["invalid login credentials", "invalid credentials"] },
   { code: "email_address_invalid", messageKey: "invalidEmail", messageHints: ["invalid email", "invalid address", "not a valid email"] },
